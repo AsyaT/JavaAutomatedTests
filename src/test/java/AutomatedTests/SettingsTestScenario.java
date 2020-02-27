@@ -6,6 +6,8 @@ import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.AndroidElement;
+import io.appium.java_client.android.nativekey.AndroidKey;
+import io.appium.java_client.android.nativekey.KeyEvent;
 import cucumber.api.java.en.Then;
 
 import static org.junit.Assert.assertEquals;
@@ -27,22 +29,8 @@ public class SettingsTestScenario {
 	static AndroidDriver androidDriver;
 
 	public SettingsTestScenario() {
-		DesiredCapabilities capabilities = new DesiredCapabilities();
-		capabilities.setCapability("platformName", "Android");
-		capabilities.setCapability("deviceName", "Zebra MC33");
-		capabilities.setCapability("platformVersion", "7.1");
-		capabilities.setCapability("app", "C:\\AndroidProjects\\ZebraScanner\\app\\build\\outputs\\apk\\debug\\app-debug.apk");
-		
-		try {
-			URL url = new URL("http://localhost:4723/wd/hub");
-			appiumDriver = new AppiumDriver<MobileElement>(url, capabilities);
-
-			androidDriver = new AndroidDriver(url, capabilities);
-			 
-		} catch (MalformedURLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		appiumDriver = ZFermaAppiumDriver.getInstance().getAppiumDriver();
+		androidDriver = ZFermaAndroidDriver.getInstance().getAndroidDriver();
 	}
 	
   
@@ -76,7 +64,8 @@ public class SettingsTestScenario {
   @When("^I enter IP adress '(.*?)'$")
   public void whenIenterIPadress(String ipAdress) throws Throwable {
 	  MobileElement urlTextEitor = appiumDriver.findElement(By.id("editTxtServer"));
-      urlTextEitor.setValue(ipAdress);
+	  urlTextEitor.clear();
+	  urlTextEitor.sendKeys(ipAdress);
 
       appiumDriver.hideKeyboard();
   }
@@ -84,13 +73,13 @@ public class SettingsTestScenario {
   @When("^I enter username '(.*?)'$")
   public void whenIenterusername(String username) throws Throwable {
 	  MobileElement urlTextEitor = appiumDriver.findElement(By.id("editTxt1CUserName"));
-      urlTextEitor.setValue(username);
+      urlTextEitor.sendKeys(username);
   }
   
   @When("^I enter password '(.*?)'$")
   public void whenIenterpassword(String password) throws Throwable {
 	  MobileElement urlTextEitor = appiumDriver.findElement(By.id("editTxt1CPassword"));
-      urlTextEitor.setValue(password);
+      urlTextEitor.sendKeys(password);
   }
   
   @When("^I go back$")
@@ -99,7 +88,7 @@ public class SettingsTestScenario {
 	  MobileElement backButton = appiumDriver.findElement(By.xpath("//android.widget.ImageButton[@content-desc=\"Перейти вверх\"]"));
       backButton.click();
       
-	  assertEquals(".PreSettingsActivity", androidDriver.currentActivity());
+	  //assertEquals(".PreSettingsActivity", androidDriver.currentActivity());
   }
 
   @Then("^I see error alert message '(.*?)'$")
@@ -117,6 +106,8 @@ public class SettingsTestScenario {
   {
 	  MobileElement txtError = appiumDriver.findElement(By.id("txtNoConnectionInfo"));
 	  assertEquals(message, txtError.getText());
+	  
+	  androidDriver.pressKey(new KeyEvent(AndroidKey.BACK));
   }
   
   @Then("^I see operation selection activity screen")
