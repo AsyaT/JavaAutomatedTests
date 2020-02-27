@@ -14,7 +14,8 @@ import io.appium.java_client.MobileElement;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(features = "src\\test\\java\\Features",glue = "AutomatedTests")
-public class RunTests {
+public class RunTests 
+{
 	
 	
 
