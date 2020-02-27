@@ -1,9 +1,6 @@
 Feature: InventoryScenario
 	User do scanning on Inventory operation
 
-Background:
-	Given I run application
-
 Scenario: Wants select operation without settings set
 	When I press button 'Выберите операцию'
 	Then I see error alert message 'Настройки не заданы!'
@@ -15,8 +12,8 @@ Scenario: Wants to input incorrect settings
 	And I enter password 'pwd'
 	When I press button 'Сохранить'
 	When I go back
-	When I press button 'Выберете операцию'
-	Then I see error screen 'Сервер не отвечает'
+	When I press button 'Выберите операцию'
+	Then I see error screen 'Сервер не отвечает.'
 
 Scenario: Wants to input correct settings
 	When I press button 'Настройки'
@@ -25,5 +22,5 @@ Scenario: Wants to input correct settings
 	And I enter password '123'
 	When I press button 'Сохранить'
 	When I go back
-	When I press button 'Выберете операцию'
+	When I press button 'Выберите операцию'
 	Then I see operation selection activity screen

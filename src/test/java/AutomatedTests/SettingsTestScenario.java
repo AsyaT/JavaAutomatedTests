@@ -26,9 +26,7 @@ public class SettingsTestScenario {
 	static AppiumDriver<MobileElement> appiumDriver;
 	static AndroidDriver androidDriver;
 
-	@Given("^I run application")
-	public void backgroidnGiven() throws Throwable 
-	{
+	public SettingsTestScenario() {
 		DesiredCapabilities capabilities = new DesiredCapabilities();
 		capabilities.setCapability("platformName", "Android");
 		capabilities.setCapability("deviceName", "Zebra MC33");
@@ -38,6 +36,7 @@ public class SettingsTestScenario {
 		try {
 			URL url = new URL("http://localhost:4723/wd/hub");
 			appiumDriver = new AppiumDriver<MobileElement>(url, capabilities);
+
 			androidDriver = new AndroidDriver(url, capabilities);
 			 
 		} catch (MalformedURLException e) {
@@ -99,6 +98,8 @@ public class SettingsTestScenario {
   {
 	  MobileElement backButton = appiumDriver.findElement(By.xpath("//android.widget.ImageButton[@content-desc=\"Перейти вверх\"]"));
       backButton.click();
+      
+	  assertEquals(".PreSettingsActivity", androidDriver.currentActivity());
   }
 
   @Then("^I see error alert message '(.*?)'$")
@@ -111,6 +112,13 @@ public class SettingsTestScenario {
       alertButton.click();
   }
 
+  @Then("^I see error screen '(.*?)'")
+  public void thenIseeSeeErrorScreen(String message)
+  {
+	  MobileElement txtError = appiumDriver.findElement(By.id("txtNoConnectionInfo"));
+	  assertEquals(message, txtError.getText());
+  }
+  
   @Then("^I see operation selection activity screen")
   public void thenIseeOperationSelectionActivity()
   {
