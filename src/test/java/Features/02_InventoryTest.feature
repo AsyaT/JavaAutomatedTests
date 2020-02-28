@@ -11,8 +11,8 @@ Feature: User at Inventory operation
     Then I see alert title 'Ошибка при сканировании штрих-кода!' and message 'Тип LocalEAN13 запрещен к сканирванию'
     When I scan 'EAN13' barcode '2209983009489'
     Then I see alert title 'Ошибка при сканировании штрих-кода!' and message 'Тип LocalEAN13 запрещен к сканирванию'
-    
- Scenario: Do scan correct barcodes
+
+  Scenario: Do scan correct barcodes
     When I scan 'GS1_DATABAR_EXP' barcode '0104630037036817310302530010082011190820171908252100001923000'
     Then I see string in table with number '1'
     And nomenclature name is 'Филе белое цыпленка-бройлера, охл.~25,00 кг*1/~25,0 кг/ (пакет пнд, полимерный ящик)Характеристика: ЗФД'
@@ -39,9 +39,18 @@ Feature: User at Inventory operation
     And nomenclature name is 'Бедрышко куриное "Здоровая Ферма", охл.~8,00 кг*1/~8,0 кг/ (гофрокороб, пленка пнд)Характеристика: Метро'
     And weight is '7.456'
     And quantity is '1'
-    
-Scenario: Do scan error GS1 barcodes
+
+  Scenario: Do scan error GS1 barcodes
     When I scan 'GS1_DATABAR_EXP' barcode '0104630037036817310302470010082011200120172001262100001929000'
     Then I see alert title 'Ошибка при сканировании штрих-кода!' and message 'Производитель с номером 9 не найден'
     When I scan 'GS1_DATABAR_EXP' barcode '010463004929467011190820171909091008202100001926000'
     Then I see alert title 'Ошибка при сканировании штрих-кода!' and message 'Такой штрих-код не найден в номенклатуре!'
+
+  Scenario: Scan barcode with two nomenclatures
+    When I scan 'GS1_DATABAR_EXP' barcode '0104607094817550310301219710082011200205172002102100001925000'
+    Then I see dialog to chose correct nomenclature
+    And select line item '2'
+    Then I see string in table with number '3'
+    And nomenclature name is 'Фарш куриный Котлетный,  "Здоровая Ферма", зам.0,50 кг*24/12,0 кг/ (полиамид. оболочка, гофрокороб)'
+    And weight is '12.197'
+    And quantity is '1'

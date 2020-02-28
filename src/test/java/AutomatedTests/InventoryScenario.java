@@ -1,6 +1,7 @@
 package AutomatedTests;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 import java.nio.charset.StandardCharsets;
 import java.util.List;
@@ -61,7 +62,7 @@ public class InventoryScenario {
 
   }
 
-  @Then("^I see Inventory activityn$")
+  @Then("^I see Inventory activity$")
   public void thenIseeInventoryActivity() throws Throwable {
 	  assertEquals(".InventoryActivity", androidDriver.currentActivity());
   }
@@ -104,7 +105,7 @@ public class InventoryScenario {
 	  int i = 0;
 	  for (byte b : nomInBytes)
 	  {
-		  if((b == 10) || (b == 13))
+		  if(b == 10)
 		  {
 		  }
 		  else
@@ -130,4 +131,27 @@ public class InventoryScenario {
 	  assertEquals(quantity,fourTextViews.get(3).getText());
   }
   
+  @Then("^I see dialog to chose correct nomenclature$")
+  public void thenISeeDialogToChoseNomenclature()
+  {
+	  MobileElement dialog = appiumDriver.findElement(By.id("android:id/alertTitle"));
+	  assertEquals("Выберете номенклатуру", dialog.getText());
+  }
+  
+  @And("^select line item '(.*?)'$")
+  public void andSelectLineItem(Integer lineNumber)
+  {
+	  MobileElement listOfProductsContainer = appiumDriver.findElement(By.id("android:id/select_dialog_listview"));
+	  List<MobileElement> listOfProducts = listOfProductsContainer.findElementsByXPath("//android.widget.TextView");
+	  
+	  if(lineNumber > listOfProducts.size())
+	  {
+		  assertNull(lineNumber+" is grater than size of dialog", null);
+	  }
+	  else 
+	  {
+		  listOfProducts.get(lineNumber).click();
+	  }
+	  
+  }
 }
