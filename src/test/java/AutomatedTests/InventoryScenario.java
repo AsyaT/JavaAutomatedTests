@@ -30,12 +30,15 @@ public class InventoryScenario {
 	public String RemoveLineBreakes(String input)
 	{
 		byte[] nomInBytes = input.getBytes(StandardCharsets.UTF_8);
-		  byte[] result = new byte[nomInBytes.length-1];
+		
+		  byte[] result = new byte[nomInBytes.length];
 		  int i = 0;
+		  int quantity = 0;
 		  for (byte b : nomInBytes)
 		  {
 			  if(b == 10)
 			  {
+				  quantity++;
 			  }
 			  else
 			  {
@@ -45,7 +48,9 @@ public class InventoryScenario {
 			 
 		  }
 		  
-		  return new String(result, StandardCharsets.UTF_8);
+		  String resultString = new String(result, StandardCharsets.UTF_8);
+		  
+		  return resultString.substring(0, resultString.length()-quantity);
 	}
 	
   @Given("^Inventory acativity is open$")
@@ -145,7 +150,7 @@ public class InventoryScenario {
 	  assertEquals("Выберете номенклатуру", dialog.getText());
   }
   
-  @And("^select line item '(.*?) with name(.*?)'$")
+  @And("^select line item '(.*?)' with name '(.*?)'$")
   public void andSelectLineItem(Integer lineNumber, String fullName)
   {
 	  MobileElement listOfProductsContainer = appiumDriver.findElement(By.id("android:id/select_dialog_listview"));
@@ -157,11 +162,14 @@ public class InventoryScenario {
 	  }
 	  else 
 	  {
-		  MobileElement lineToChoose = listOfProducts.get(lineNumber);
+		  MobileElement lineToChooseElement = listOfProducts.get(lineNumber-1);
 		  
-		  assertEquals(fullName, RemoveLineBreakes(lineToChoose.getText()));
+		  String lineToChoseName = lineToChooseElement.getText();
+		  String fixedLine = RemoveLineBreakes(lineToChoseName);
 		  
-		  lineToChoose.click();
+		  assertEquals(fullName, fixedLine);
+		  
+		  lineToChooseElement.click();
 	  }
 	  
   }
