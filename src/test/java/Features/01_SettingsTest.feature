@@ -1,4 +1,4 @@
-Feature: InventoryScenario
+Feature: Settings
 	User do scanning on Inventory operation
 
 Scenario: Wants select operation without settings set

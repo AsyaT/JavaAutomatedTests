@@ -89,8 +89,6 @@ public class SettingsTestScenario {
   {
 	  MobileElement backButton = appiumDriver.findElement(By.xpath("//android.widget.ImageButton[@content-desc=\"Перейти вверх\"]"));
       backButton.click();
-      
-	 // assertEquals(".PreSettingsActivity", androidDriver.currentActivity());
   }
 
   @Then("^I see error alert message '(.*?)'$")

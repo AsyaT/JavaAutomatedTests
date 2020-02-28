@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.openqa.selenium.By;
 
+import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.When;
 import io.appium.java_client.AppiumDriver;
@@ -64,4 +65,50 @@ public class InventoryScenario {
 	  assertEquals(".InventoryActivity", androidDriver.currentActivity());
   }
 
+  @Then("^I see alert title '(.*?)' and message '(.*?)'$")
+  public void thenIseeAlertMessage(String title, String message)
+  {
+	  MobileElement alertTitle = appiumDriver.findElement(By.id("android:id/alertTitle"));
+      assertEquals(title, alertTitle.getText());
+      
+      MobileElement alertMessage = appiumDriver.findElement(By.id("android:id/message"));
+      assertEquals(message, alertMessage.getText());
+
+      MobileElement alertButton = appiumDriver.findElement(By.id("android:id/button1"));
+      alertButton.click();
+  }
+  
+  List<MobileElement> fourTextViews = null;
+  
+  @Then("^I see string in table with number '(.*?)'$")
+  public void thenISeeStringInTableWithNumber(Integer stringNumber)
+  {
+	  List<MobileElement> listViewScanTable = appiumDriver.findElements(By.xpath("//android.widget.ListView//android.widget.LinearLayout"));
+	  // listViewScanTable[0] = header
+	  
+	  MobileElement scannedStringLinearLayout = listViewScanTable.get(stringNumber);
+	  fourTextViews = scannedStringLinearLayout.findElements(By.xpath("//android.widget.TextView"));
+	  
+	  assertEquals(stringNumber.toString(),fourTextViews.get(0).getText());
+	  
+  }
+  
+  @And("^nomenclature name is '(.*?)'$")
+  public void andNomenclatureIs(String nomenclatureName)
+  {
+	  assertEquals(nomenclatureName,fourTextViews.get(1).getText().toString());
+  }
+  
+  @And("^weight is '(.*?)'$")
+  public void andWeightIs(Double weight)
+  {
+	  assertEquals(weight,fourTextViews.get(2).getText());
+  }
+  
+  @And("^quantity is '(.*?)'$")
+  public void andWeightIs(Integer quantity)
+  {
+	  assertEquals(quantity,fourTextViews.get(3).getText());
+  }
+  
 }
