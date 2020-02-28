@@ -2,6 +2,7 @@ package AutomatedTests;
 
 import static org.junit.Assert.assertEquals;
 
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 import org.openqa.selenium.By;
@@ -96,7 +97,25 @@ public class InventoryScenario {
   @And("^nomenclature name is '(.*?)'$")
   public void andNomenclatureIs(String nomenclatureName)
   {
-	  assertEquals(nomenclatureName,fourTextViews.get(1).getText().toString());
+	  String nomenclature = fourTextViews.get(1).getText();
+	  
+	  byte[] nomInBytes = nomenclature.getBytes(StandardCharsets.UTF_8);
+	  byte[] result = new byte[nomInBytes.length-1];
+	  int i = 0;
+	  for (byte b : nomInBytes)
+	  {
+		  if((b == 10) || (b == 13))
+		  {
+		  }
+		  else
+		  {
+			  result[i] = b;
+			  i++;
+		  }
+		 
+	  }
+	  
+	  assertEquals(nomenclatureName, new String(result, StandardCharsets.UTF_8));
   }
   
   @And("^weight is '(.*?)'$")
