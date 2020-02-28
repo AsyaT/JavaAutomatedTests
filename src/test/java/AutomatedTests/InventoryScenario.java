@@ -27,6 +27,27 @@ public class InventoryScenario {
 		androidDriver = ZFermaAndroidDriver.getInstance().getAndroidDriver();
 	}
 	
+	public String RemoveLineBreakes(String input)
+	{
+		byte[] nomInBytes = input.getBytes(StandardCharsets.UTF_8);
+		  byte[] result = new byte[nomInBytes.length-1];
+		  int i = 0;
+		  for (byte b : nomInBytes)
+		  {
+			  if(b == 10)
+			  {
+			  }
+			  else
+			  {
+				  result[i] = b;
+				  i++;
+			  }
+			 
+		  }
+		  
+		  return new String(result, StandardCharsets.UTF_8);
+	}
+	
   @Given("^Inventory acativity is open$")
   public void givenInventoryActivityIsOpen() throws Throwable {
 	  assertEquals(".InventoryActivity", androidDriver.currentActivity());
@@ -100,23 +121,9 @@ public class InventoryScenario {
   {
 	  String nomenclature = fourTextViews.get(1).getText();
 	  
-	  byte[] nomInBytes = nomenclature.getBytes(StandardCharsets.UTF_8);
-	  byte[] result = new byte[nomInBytes.length-1];
-	  int i = 0;
-	  for (byte b : nomInBytes)
-	  {
-		  if(b == 10)
-		  {
-		  }
-		  else
-		  {
-			  result[i] = b;
-			  i++;
-		  }
-		 
-	  }
+	  String calculatingElement = RemoveLineBreakes(nomenclature);
 	  
-	  assertEquals(nomenclatureName, new String(result, StandardCharsets.UTF_8));
+	  assertEquals(nomenclatureName, calculatingElement);
   }
   
   @And("^weight is '(.*?)'$")
@@ -138,8 +145,8 @@ public class InventoryScenario {
 	  assertEquals("Выберете номенклатуру", dialog.getText());
   }
   
-  @And("^select line item '(.*?)'$")
-  public void andSelectLineItem(Integer lineNumber)
+  @And("^select line item '(.*?) with name(.*?)'$")
+  public void andSelectLineItem(Integer lineNumber, String fullName)
   {
 	  MobileElement listOfProductsContainer = appiumDriver.findElement(By.id("android:id/select_dialog_listview"));
 	  List<MobileElement> listOfProducts = listOfProductsContainer.findElementsByXPath("//android.widget.TextView");
@@ -150,7 +157,11 @@ public class InventoryScenario {
 	  }
 	  else 
 	  {
-		  listOfProducts.get(lineNumber).click();
+		  MobileElement lineToChoose = listOfProducts.get(lineNumber);
+		  
+		  assertEquals(fullName, RemoveLineBreakes(lineToChoose.getText()));
+		  
+		  lineToChoose.click();
 	  }
 	  
   }
