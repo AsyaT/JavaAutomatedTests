@@ -36,7 +36,7 @@ Feature: User at Inventory operation
     And quantity is '5'
     When I scan 'GS1_DATABAR_EXP' barcode '0104660017708243310300745610082011190820171908252100001922000'
     Then I see string in table with number '2'
-    And nomenclature name is 'Бедрышко куриное \"Здоровая Ферма\", охл.~8,00 кг*1/~8,0 кг/ (гофрокороб, пленка пнд)Характеристика: Метро'
+    And nomenclature name is 'Бедрышко куриное "Здоровая Ферма", охл.~8,00 кг*1/~8,0 кг/ (гофрокороб, пленка пнд)Характеристика: Метро'
     And weight is '7.456'
     And quantity is '1'
     

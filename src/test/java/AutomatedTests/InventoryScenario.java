@@ -119,13 +119,13 @@ public class InventoryScenario {
   }
   
   @And("^weight is '(.*?)'$")
-  public void andWeightIs(Double weight)
+  public void andWeightIs(String weight)
   {
-	  assertEquals(weight,fourTextViews.get(2).getText());
+	  assertEquals(weight, fourTextViews.get(2).getText());
   }
   
   @And("^quantity is '(.*?)'$")
-  public void andWeightIs(Integer quantity)
+  public void andQuantityIs(String quantity)
   {
 	  assertEquals(quantity,fourTextViews.get(3).getText());
   }
