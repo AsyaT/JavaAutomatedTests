@@ -49,7 +49,7 @@ Feature: User at Inventory operation
   Scenario: Scan barcode with two nomenclatures
     When I scan 'GS1_DATABAR_EXP' barcode '0104607094817550310301219710082011200205172002102100001925000'
     Then I see dialog to chose correct nomenclature
-    And select line item '2' with name 'Фарш куриный Котлетный,  "Здоровая Ферма", зам.0,50 кг*24/12,0 кг/ (полиамид. оболочка, гофрокороб) Характеристика: Казахстан Bec: 0.5'
+    And select line item '2' with name 'Фарш куриный Котлетный,  "Здоровая Ферма", зам.0,50 кг*24/12,0 кг/ (полиамид. оболочка, гофрокороб) Характеристика: Казахстан Вес: 0.5'
     Then I see string in table with number '3'
     And nomenclature name is 'Фарш куриный Котлетный,  "Здоровая Ферма", зам.0,50 кг*24/12,0 кг/ (полиамид. оболочка, гофрокороб)Характеристика: Казахстан'
     And weight is '12.197'
