@@ -73,12 +73,14 @@ public class SettingsTestScenario {
   @When("^I enter username '(.*?)'$")
   public void whenIenterusername(String username) throws Throwable {
 	  MobileElement urlTextEitor = appiumDriver.findElement(By.id("editTxt1CUserName"));
+	  urlTextEitor.clear();
       urlTextEitor.sendKeys(username);
   }
   
   @When("^I enter password '(.*?)'$")
   public void whenIenterpassword(String password) throws Throwable {
 	  MobileElement urlTextEitor = appiumDriver.findElement(By.id("editTxt1CPassword"));
+	  urlTextEitor.clear();
       urlTextEitor.sendKeys(password);
   }
   
@@ -88,7 +90,7 @@ public class SettingsTestScenario {
 	  MobileElement backButton = appiumDriver.findElement(By.xpath("//android.widget.ImageButton[@content-desc=\"Перейти вверх\"]"));
       backButton.click();
       
-	  //assertEquals(".PreSettingsActivity", androidDriver.currentActivity());
+	 // assertEquals(".PreSettingsActivity", androidDriver.currentActivity());
   }
 
   @Then("^I see error alert message '(.*?)'$")
