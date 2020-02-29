@@ -54,3 +54,31 @@ Feature: User at Inventory operation
     And nomenclature name is 'Фарш куриный Котлетный,  "Здоровая Ферма", зам.0,50 кг*24/12,0 кг/ (полиамид. оболочка, гофрокороб)Характеристика: Казахстан'
     And weight is '12.197'
     And quantity is '1'
+
+  Scenario: Scan different databars
+    When I scan 'GS1_DATABAR_EXP' barcode '0104607094817093310300795610082011190820171908252100001922000'
+    Then I see string in table with number '4'
+    And nomenclature name is 'Грудка куриная, "Здоровая Ферма", охл., 8,0 кг/ (пакет пнд, гофрокороб)'
+    When I scan 'GS1_DATABAR_EXP' barcode '0104607094812999310300615610082011190820171908252100001922000'
+    Then I see string in table with number '5'
+    And nomenclature name is 'Печень куриная, "Здоровая Ферма", зам., 0,5 кг*12/ 6,0 кг/ (подложка, стрейч)'
+    When I scan 'GS1_DATABAR_EXP' barcode '0104607094816553310300825610082011190820171908252100001922000'
+    Then I see string in table with number '6'
+    And nomenclature name is 'Бедрышко куриное, "Здоровая Ферма", зам., ~0,8 кг*10/ 8,0 кг/ (подложка, стрейч)'
+    
+    Scenario: remove selected strings
+    
+    
+    Scenario: remove all strings
+    
+    
+    Scenario: use button bar-code
+    
+    Scenario: press system button back
+    
+    Scenario: press red button back to list of operations
+    
+    
+    Scenario: press button execute
+    
+    
