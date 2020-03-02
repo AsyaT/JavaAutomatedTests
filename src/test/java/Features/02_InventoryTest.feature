@@ -46,7 +46,7 @@ Feature: User at Inventory operation
     When I scan 'GS1_DATABAR_EXP' barcode '010463004929467011190820171909091008202100001926000'
     Then I see alert title 'Ошибка при сканировании штрих-кода!' and message 'Такой штрих-код не найден в номенклатуре!'
 
-  Scenario: Scan barcode with two nomenclatures
+  Scenario: Scan barcode with two or more nomenclatures
     When I scan 'GS1_DATABAR_EXP' barcode '0104607094817550310301219710082011200205172002102100001925000'
     Then I see dialog to chose correct nomenclature
     And select line item '2' with name 'Фарш куриный Котлетный,  "Здоровая Ферма", зам.0,50 кг*24/12,0 кг/ (полиамид. оболочка, гофрокороб) Характеристика: Казахстан Вес: 0.5'
@@ -54,23 +54,39 @@ Feature: User at Inventory operation
     And nomenclature name is 'Фарш куриный Котлетный,  "Здоровая Ферма", зам.0,50 кг*24/12,0 кг/ (полиамид. оболочка, гофрокороб)Характеристика: Казахстан'
     And weight is '12.197'
     And quantity is '1'
+    
+  Scenario: Select different nomenclatures in dialog
+  	When I scan 'GS1_DATABAR_EXP' barcode '0104607094817550310301219710082011200205172002102100001925000'
+    Then I see dialog to chose correct nomenclature
+    And select line item '1' with name 'Фарш куриный Котлетный,  "Здоровая Ферма", зам.0,50 кг*24/12,0 кг/ (полиамид. оболочка, гофрокороб) Характеристика: Пятерочка Вес: 0.5'
+    Then I see string in table with number '4'
+    And nomenclature name is 'Фарш куриный Котлетный,  "Здоровая Ферма", зам.0,50 кг*24/12,0 кг/ (полиамид. оболочка, гофрокороб)Характеристика: Пятерочка'
+    And weight is '12.197'
+    And quantity is '1'
+    When I scan 'GS1_DATABAR_EXP' barcode '0104607094817550310301219710082011200205172002102100001925000'
+    Then I see dialog to chose correct nomenclature
+    And select line item '3' with name 'Фарш куриный Котлетный,  "Здоровая Ферма", зам.0,50 кг*24/12,0 кг/ (полиамид. оболочка, гофрокороб) Характеристика: базовая Вес: 0.5'
+    Then I see string in table with number '5'
+    And nomenclature name is 'Фарш куриный Котлетный,  "Здоровая Ферма", зам.0,50 кг*24/12,0 кг/ (полиамид. оболочка, гофрокороб)Характеристика: базовая'
+    And weight is '12.197'
+    And quantity is '1'
 
   Scenario: Scan different databars
     When I scan 'GS1_DATABAR_EXP' barcode '0104607094817093310300795610082011190820171908252100001922000'
-    Then I see string in table with number '4'
+    Then I see string in table with number '6'
     And nomenclature name is 'Грудка куриная, "Здоровая Ферма", охл., 8,0 кг/ (пакет пнд, гофрокороб)Характеристика: базовая'
     When I scan 'GS1_DATABAR_EXP' barcode '0104607094812999310300615610082011190820171908252100001922000'
-    Then I see string in table with number '5'
+    Then I see string in table with number '7'
     And nomenclature name is 'Печень куриная, "Здоровая Ферма", зам., 0,5 кг*12/ 6,0 кг/ (подложка, стрейч)Характеристика: Тандер'
     When I scan 'GS1_DATABAR_EXP' barcode '0104607094816553310300825610082011190820171908252100001922000'
-    Then I see string in table with number '6'
+    Then I see string in table with number '8'
     And nomenclature name is 'Бедрышко куриное, "Здоровая Ферма", зам., ~0,8 кг*10/ 8,0 кг/ (подложка, стрейч)Характеристика: базовая'
 
   Scenario: remove selected string
-  	When I press string number '4'
-  	Then String number '4' is highlighted with yellow color
+  	When I press string number '6'
+  	Then String number '6' is highlighted with yellow color
   	When I press button 'Удалить строку'
-  	Then I see string in table with number '4'
+  	Then I see string in table with number '6'
   	And nomenclature name is 'Печень куриная, "Здоровая Ферма", зам., 0,5 кг*12/ 6,0 кг/ (подложка, стрейч)Характеристика: Тандер'
   	
   Scenario: remove several strings
