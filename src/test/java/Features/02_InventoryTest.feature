@@ -6,7 +6,7 @@ Feature: User at Inventory operation
     Then I see Inventory activity
 
   Scenario: Do scan error barcodes
-    Given Inventory acativity is open
+    Given Inventory activity is open
     When I scan 'EAN13' barcode '4603502137574'
     Then I see alert title 'Ошибка при сканировании штрих-кода!' and message 'Тип LocalEAN13 запрещен к сканирванию'
     When I scan 'EAN13' barcode '2209983009489'
@@ -100,12 +100,6 @@ Feature: User at Inventory operation
   	Then I see fragment with message 'Тип LocalEAN13 запрещен к сканирванию'
   	When I scan 'GS1_DATABAR_EXP' barcode '0104630037036817310302530010082011190820171908252100001923000'
   	Then I see fragment with message 'Штрих-код: 4630037036817 Номенклатура: Филе белое цыпленка-бройлера, охл.~25,00 кг*1/~25,0 кг/ (пакет пнд, полимерный ящик) Характеристика: ЗФД Вес: 25.3 Номер партии: 0820 Дата производства: 20/08/19 Дата истечения срока годност: 25/08/19 Серийный номер: 00001 Внутренний код производителя: 3 - УРАЛБРОЙЛЕР ЗАО (Кунашак) Внутренний код оборудования: 0'
-		When I touch the fragment
-		Then the fragment disappear
-		
-	Scenario: close fragment by back button
-		When I press button 'Штрихкод'
-  	Then I see fragment with message '... Сканируйте штрих-код ...'
   	When I press system button back
   	Then the fragment disappear
 
@@ -113,7 +107,7 @@ Feature: User at Inventory operation
   	When I press system button back
   	Then I see operation selection activity screen
 
-  Scenario: press red button back to list of operations
+  Scenario: press button back to list of operations
   	When I select 'Инвентаризация' in list of operation types
   	Then I see Inventory activity
   	When I press button 'Назад к выбору операции'

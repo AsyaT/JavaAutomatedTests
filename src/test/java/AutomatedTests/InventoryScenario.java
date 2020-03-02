@@ -57,7 +57,7 @@ public class InventoryScenario {
 		  return resultString.substring(0, resultString.length()-quantity);
 	}
 	
-  @Given("^Inventory acativity is open$")
+  @Given("^Inventory activity is open$")
   public void givenInventoryActivityIsOpen() throws Throwable {
 	  assertEquals(".InventoryActivity", androidDriver.currentActivity());
   }
@@ -237,16 +237,9 @@ public class InventoryScenario {
 	  assertNotNull(fragment);
 	  
 	  MobileElement text = appiumDriver.findElement(By.id("textViewBarcodeInfo"));
-	  assertEquals(message, text.getText());
+	  assertEquals(message, RemoveLineBreakes(text.getText()));
   }
   
-  @When("^I touch the fragment$")
-  public void whenITouchTheFragment()
-  {
-	  MobileElement fragment = appiumDriver.findElement(By.id("frBarcodeInfo"));
-	  fragment.click();
-	  
-  }
   
   @Then("^the fragment disappear$")
   public void thenTheFragmentDisappear() 
