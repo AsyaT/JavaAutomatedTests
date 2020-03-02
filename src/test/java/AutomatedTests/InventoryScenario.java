@@ -8,13 +8,16 @@ import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.When;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
+import io.appium.java_client.TouchAction;
 import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.touch.offset.PointOption;
 import cucumber.api.java.en.Then;
 
 public class InventoryScenario {
@@ -109,7 +112,10 @@ public class InventoryScenario {
   
   private MobileElement GetListViewString(Integer stringNumber)
   {
-	  List<MobileElement> listViewScanTable = appiumDriver.findElements(By.xpath("//android.widget.ListView//android.widget.LinearLayout"));
+	  MobileElement listView = appiumDriver.findElement(By.id("listViewProductContainer"));
+	  
+	  List<MobileElement> listViewScanTable = listView.findElements(By.className("android.widget.LinearLayout"));
+	 
 	  //because listViewScanTable[0] = header
 	  
 	  if(stringNumber< listViewScanTable.size())
@@ -118,6 +124,7 @@ public class InventoryScenario {
 	  }
 	  else 
 	  {
+
 		  return null;
 	  }
 	  
@@ -217,7 +224,10 @@ public class InventoryScenario {
   public void thenTheTableIsEmpty()
   {
 	  List<MobileElement> listViewScanTable = appiumDriver.findElements(By.xpath("//android.widget.ListView//android.widget.LinearLayout"));
-	  assertEquals(0, listViewScanTable.size());
+	  
+	  Integer headerElement = 1;
+	  
+	  assertEquals(0, listViewScanTable.size() - headerElement);
   }
   
   @Then("^I see fragment with message '(.*?)'$")

@@ -81,7 +81,7 @@ Feature: User at Inventory operation
   	Then I see string in table with number '1'
   	And nomenclature name is 'Бедрышко куриное "Здоровая Ферма", охл.~8,00 кг*1/~8,0 кг/ (гофрокороб, пленка пнд)Характеристика: Метро'
   	Then I see string in table with number '2'
-  	And nomenclature name is 'Печень куриная, "Здоровая Ферма", зам., 0,5 кг*12/ 6,0 кг/ (подложка, стрейч)'
+  	And nomenclature name is 'Печень куриная, "Здоровая Ферма", зам., 0,5 кг*12/ 6,0 кг/ (подложка, стрейч)Характеристика: Тандер'
   	
 
   Scenario: remove all strings
