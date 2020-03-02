@@ -56,6 +56,18 @@ public class SettingsTestScenario {
 	  {
 		  buttonId="btnSaveSettings";
 	  }
+	  else if(btnName.equalsIgnoreCase("Удалить строку"))
+	  {
+		  buttonId = "btnRemoveOne";
+	  }
+	  else if (btnName.equalsIgnoreCase("Удалить всё"))
+	  {
+		  buttonId = "btnRenoveAll";
+	  }
+	  else if(btnName.equalsIgnoreCase("Штрихкод"))
+	  {
+		  buttonId = "btnBarcodeInfo";
+	  }
 	  
 	  MobileElement selectOperationButton = appiumDriver.findElement( By.id(buttonId));
       selectOperationButton.click();
@@ -115,6 +127,5 @@ public class SettingsTestScenario {
   {
 	  assertEquals(".OperationSelectionActivity", androidDriver.currentActivity());
   }
-  
 
 }

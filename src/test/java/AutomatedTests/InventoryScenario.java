@@ -1,6 +1,7 @@
 package AutomatedTests;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 
 import java.nio.charset.StandardCharsets;
@@ -172,5 +173,68 @@ public class InventoryScenario {
 		  lineToChooseElement.click();
 	  }
 	  
+  }
+  
+  @When("^I press string number '(.*?)'$")
+  public void whenIPressStringNumber(Integer stringNumber)
+  {
+	  List<MobileElement> listViewScanTable = appiumDriver.findElements(By.xpath("//android.widget.ListView//android.widget.LinearLayout"));
+	  MobileElement scannedStringLinearLayout = listViewScanTable.get(stringNumber-1);
+	  
+	  assertNotNull(scannedStringLinearLayout);
+	  
+	  scannedStringLinearLayout.click();
+	  
+  }
+  
+  @Then("^String number '(.*?)' is highlighted with yellow color$")
+  public void ItHighLightedWithYellow(Integer stringNumber)
+  {
+	  List<MobileElement> listViewScanTable = appiumDriver.findElements(By.xpath("//android.widget.ListView//android.widget.LinearLayout"));
+	  MobileElement scannedStringLinearLayout = listViewScanTable.get(stringNumber-1);
+	  assertNotNull(scannedStringLinearLayout);
+	  if(scannedStringLinearLayout!=null)
+	  {
+		  String cssValue = scannedStringLinearLayout.getCssValue("background-color");
+		  assertEquals("yellow", cssValue);
+	  }
+  }
+  
+  @Then("^the table is empty$")
+  public void thenTheTableIsEmpty()
+  {
+	  List<MobileElement> listViewScanTable = appiumDriver.findElements(By.xpath("//android.widget.ListView//android.widget.LinearLayout"));
+	  assertEquals(0, listViewScanTable.size());
+  }
+  
+  @Then("^I see fragment with message '(.*?)'$")
+  public void thenIseeFragmentWithMessage(String message)
+  {
+	  MobileElement fragment = appiumDriver.findElement(By.id("frBarcodeInfo"));
+	  assertNotNull(fragment);
+	  
+	  MobileElement text = appiumDriver.findElement(By.id("textViewBarcodeInfo"));
+	  assertEquals(message, text.getText());
+  }
+  
+  @When("^I touch the fragment$")
+  public void whenITouchTheFragment()
+  {
+	  MobileElement fragment = appiumDriver.findElement(By.id("frBarcodeInfo"));
+	  fragment.click();
+	  
+  }
+  
+  @Then("^the fragment disappear$")
+  public void thenTheFragmentDisappear() 
+  {
+	  MobileElement fragment = appiumDriver.findElement(By.id("frBarcodeInfo"));
+	  assertNull(fragment);
+  }
+  
+  @When("^I press system button back$")
+  public void whenIPressSystemButtonBack()
+  {
+	  appiumDriver.navigate().back();
   }
 }
