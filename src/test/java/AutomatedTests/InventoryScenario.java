@@ -112,7 +112,15 @@ public class InventoryScenario {
 	  List<MobileElement> listViewScanTable = appiumDriver.findElements(By.xpath("//android.widget.ListView//android.widget.LinearLayout"));
 	  //because listViewScanTable[0] = header
 	  
-	 return listViewScanTable.get(stringNumber);
+	  if(stringNumber< listViewScanTable.size())
+	  {
+		  	return listViewScanTable.get(stringNumber);
+	  }
+	  else 
+	  {
+		  return null;
+	  }
+	  
   }
   
   List<MobileElement> fourTextViews = null;

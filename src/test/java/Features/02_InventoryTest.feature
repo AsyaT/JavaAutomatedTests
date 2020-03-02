@@ -71,7 +71,7 @@ Feature: User at Inventory operation
   	Then String number '4' is highlighted with yellow color
   	When I press button 'Удалить строку'
   	Then I see string in table with number '4'
-  	And nomenclature name is 'Печень куриная, "Здоровая Ферма", зам., 0,5 кг*12/ 6,0 кг/ (подложка, стрейч)'
+  	And nomenclature name is 'Печень куриная, "Здоровая Ферма", зам., 0,5 кг*12/ 6,0 кг/ (подложка, стрейч)Характеристика: Тандер'
   	
   Scenario: remove several strings
   	When I press string number '1'
