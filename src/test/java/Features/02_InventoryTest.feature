@@ -1,7 +1,6 @@
 Feature: User at Inventory operation
   User scan different barcodes
 
-@Success
   Scenario: Open Inventory scan activity
     When I select 'Инвентаризация' in list of operation types
     Then I see Inventory activity
