@@ -94,7 +94,6 @@ Feature: User at Inventory operation
   	When I press button 'Удалить всё'
   	Then the table is empty
 
-@BarcodeButton
   Scenario: use button bar-code
   	When I press button 'Штрихкод'
   	Then I see fragment with message '... Сканируйте штрих-код ...'
@@ -105,13 +104,11 @@ Feature: User at Inventory operation
   	When I press system button back
   	Then the fragment disappear
 
-@BarcodeButton
   Scenario: press system button back
   	Given Inventory activity is open
   	When I press system button back
   	Then I see operation selection activity screen
 
-@BarcodeButton
   Scenario: press button back to list of operations
   	When I select 'Инвентаризация' in list of operation types
   	Then I see Inventory activity
