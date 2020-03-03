@@ -68,6 +68,10 @@ public class SettingsTestScenario {
 	  {
 		  buttonId = "btnBarcodeInfo";
 	  }
+	  else if(btnName.equalsIgnoreCase("Назад к списку операций"))
+	  {
+		  buttonId="btnBack";
+	  }
 	  
 	  MobileElement selectOperationButton = appiumDriver.findElement( By.id(buttonId));
       selectOperationButton.click();

@@ -1,6 +1,7 @@
 Feature: User at Inventory operation
   User scan different barcodes
 
+@Success
   Scenario: Open Inventory scan activity
     When I select 'Инвентаризация' in list of operation types
     Then I see Inventory activity
@@ -93,24 +94,28 @@ Feature: User at Inventory operation
   	When I press button 'Удалить всё'
   	Then the table is empty
 
+@BarcodeButton
   Scenario: use button bar-code
   	When I press button 'Штрихкод'
   	Then I see fragment with message '... Сканируйте штрих-код ...'
   	When I scan 'EAN13' barcode '4603502137574'
   	Then I see fragment with message 'Тип LocalEAN13 запрещен к сканирванию'
   	When I scan 'GS1_DATABAR_EXP' barcode '0104630037036817310302530010082011190820171908252100001923000'
-  	Then I see fragment with message 'Штрих-код: 4630037036817 Номенклатура: Филе белое цыпленка-бройлера, охл.~25,00 кг*1/~25,0 кг/ (пакет пнд, полимерный ящик) Характеристика: ЗФД Вес: 25.3 Номер партии: 0820 Дата производства: 20/08/19 Дата истечения срока годност: 25/08/19 Серийный номер: 00001 Внутренний код производителя: 3 - УРАЛБРОЙЛЕР ЗАО (Кунашак) Внутренний код оборудования: 0'
+  	Then I see fragment with message 'Штрих-код: 4630037036817Номенклатура: Филе белое цыпленка-бройлера, охл.~25,00 кг*1/~25,0 кг/ (пакет пнд, полимерный ящик)Характеристика: ЗФДВес: 25.3 кгНомер партии: 0820Дата производства: 20-08-2019Дата истечения срока годности: 25-08-2019Серийный номер: 00001Внутренний код производителя: 3 - УРАЛБРОЙЛЕР ЗАО (Кунашак)Внутренний код оборудования: 0'
   	When I press system button back
   	Then the fragment disappear
 
+@BarcodeButton
   Scenario: press system button back
+  	Given Inventory activity is open
   	When I press system button back
   	Then I see operation selection activity screen
 
+@BarcodeButton
   Scenario: press button back to list of operations
   	When I select 'Инвентаризация' in list of operation types
   	Then I see Inventory activity
-  	When I press button 'Назад к выбору операции'
+  	When I press button 'Назад к списку операций'
   	Then I see operation selection activity screen
 
   Scenario: press button execute
