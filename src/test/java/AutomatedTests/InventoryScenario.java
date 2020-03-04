@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
 import java.nio.charset.StandardCharsets;
 import java.util.List;
@@ -246,10 +247,18 @@ public class InventoryScenario {
   @Then("^the fragment disappear$")
   public void thenTheFragmentDisappear() 
   {
-	  MobileElement fragment = appiumDriver.findElement(By.id("frBarcodeInfo"));
-	  	//TODO: detect that fragment is closed
-	  //assertFalse(fragment.isDisplayed());
-	  //assertFalse(fragment.isEnabled());
+	  try
+	  {
+		  MobileElement inviteMessage = appiumDriver.findElement(By.id("textViewBarcodeInfo"));
+		  if(inviteMessage != null)
+		  {
+			  assertFalse(inviteMessage.isDisplayed());
+		  }
+	  }
+	  catch (Exception e)
+	  {
+		  assertTrue(true);
+	  }
   }
   
   @When("^I press system button back$")

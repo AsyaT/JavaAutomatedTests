@@ -1,10 +1,13 @@
 package AutomatedTests;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
@@ -51,18 +54,42 @@ public class RealizationScenario
 	 {
 		 MobileElement txtOrderName= appiumDriver.findElement(By.id("txtOrderName"));
 		 
-		 this.OrderName = txtOrderName.getText();
-		 
 		 assertEquals(orderName, txtOrderName.getText());
 	 }
 	 
-	 String OrderName = "";
-	  
 	  @Then("^offer to scan order is closed$")
 	  public void thenOfferToScanOrderIsClosed()
 	  {
-		  MobileElement txtErrorOfferScanOrder = appiumDriver.findElement(By.id("txtFragmentOrderScanError"));
-		  assertNull(txtErrorOfferScanOrder);
+		  try
+		  {
+			  MobileElement inviteMessage = appiumDriver.findElement(By.id("txtFragmentOrderScanError"));
+			  if(inviteMessage != null)
+			  {
+				  assertFalse(inviteMessage.isDisplayed());
+			  }
+		  }
+		  catch (Exception e)
+		  {
+			  assertTrue(true);
+		  }
+	  }
+	  
+	  @Then("^screen with order table is closed$")
+	  public void thenScreenWithOrderTableIsClosed()
+	  {
+		  try
+		  {
+			  MobileElement inviteMessage = appiumDriver.findElement(By.id("txtProgressOrderName"));
+			  if(inviteMessage != null)
+			  {
+				  assertFalse(inviteMessage.isDisplayed());
+			  }
+		  }
+		  catch (Exception e)
+		  {
+			  assertTrue(true);
+		  }
+		  
 	  }
 	  
 	  @When("^I press on informaiton with order name$")
@@ -72,11 +99,11 @@ public class RealizationScenario
 		  fragmentOrderName.click();
 	  }
 	  
-	  @Then("^I see table with ordered products$")
-	  public void thenISeeTableWithOrdersProducts()
+	  @Then("^I see table of products for order (.*?)$")
+	  public void thenISeeTableWithOrdersProducts(String orderName)
 	  {
 		  MobileElement txtOrderName = appiumDriver.findElement(By.id("txtProgressOrderName"));
 		  assertNotNull(txtOrderName);
-		  assertEquals(this.OrderName, txtOrderName.getText());
+		  assertEquals(orderName, txtOrderName.getText());
 	  }
 }
