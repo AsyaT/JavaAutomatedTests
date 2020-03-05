@@ -6,11 +6,14 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
+import java.util.List;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 
+import cucumber.api.DataTable;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -95,5 +98,35 @@ public class RealizationScenario
 		  MobileElement txtOrderName = appiumDriver.findElement(By.id("txtProgressOrderName"));
 		  assertNotNull(txtOrderName);
 		  assertEquals(orderName, txtOrderName.getText());
+	  }
+	  
+	  @Then("^I see string table for product '(.*?)' follow$")
+	  public void thenISeeStringTableForProduct(String productName, DataTable table)
+	  {		  
+		  MobileElement tableRow = appiumDriver.findElement(By.xpath("//[contains(text(),'"+productName+"')]/parent::node()"));
+		  List<MobileElement> linearLayouts = tableRow.findElements(By.xpath("//LinearLayout"));
+		  MobileElement linearLayoutKilos = linearLayouts.get(0);
+		  MobileElement linearLayoutItems = linearLayouts.get(1);
+		  
+		  List<MobileElement> txtsLinearLayoutKilos = linearLayoutKilos.findElements(By.xpath("//TextView"));
+		  MobileElement txtOrderdKilos = txtsLinearLayoutKilos.get(0);
+		  MobileElement txtDoneKilos = txtsLinearLayoutKilos.get(1);
+		  MobileElement txtLeftKilos = txtsLinearLayoutKilos.get(2);
+		  
+		  List<MobileElement> txtsLinearLayoutItems = linearLayoutItems.findElements(By.xpath("//TextView"));
+		  MobileElement txtOrderdItems = txtsLinearLayoutItems.get(0);
+		  MobileElement txtDoneItems = txtsLinearLayoutItems.get(1);
+		  MobileElement txtLeftItems = txtsLinearLayoutItems.get(2);
+
+		  
+		  List<Map<String, String>> list = table.asMaps(String.class, String.class);
+		  assertEquals(list.get(0).get("orderedKg"), txtOrderdKilos.getText());
+		  assertEquals(list.get(0).get("doneKg"), txtDoneKilos.getText());
+		  assertEquals(list.get(0).get("leftKg"), txtLeftKilos.getText());
+
+		  assertEquals(list.get(0).get("orderedItm"), txtOrderdItems.getText());
+		  assertEquals(list.get(0).get("doneItm"), txtDoneItems.getText());
+		  assertEquals(list.get(0).get("leftItm"), txtLeftItems.getText());
+
 	  }
 }

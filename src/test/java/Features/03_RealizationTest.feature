@@ -25,17 +25,11 @@ Feature: User at realization operation
     Given I see offer to scan order 'СКАНИРУЙТЕ ШТРИХ-КОД ДОКУМЕНТА-ОСНОВАНИЯ'
     When I scan 'Code-128' barcode '291671781878991262704239534516498916291'
     Then offer to scan order is closed
-    And I see information with order name 'Заказ клиента ЗФER-111187 от 04.12.2019 15:44:11'
-@Success
-  Scenario: I see ordered items in table
-    When I press on informaiton with order name
-    Then I see table of products for order 'Заказ клиента ЗФER-111187 от 04.12.2019 15:44:11'
-    When I press system button back
-    Then screen with order table is closed
+    And I see information with order name 'Заказ клиента ЗФER-111187 от 04.12.2019 15:44:11' 
 
   Scenario: I scan package list
   
-@Success
+
   Scenario: Do scan error barcodes
     Then I see Realization activity
     When I scan 'EAN13' barcode '4603502137574'
@@ -44,3 +38,29 @@ Feature: User at realization operation
     Then I see alert title 'Ошибка при сканировании штрих-кода!' and message 'Тип LocalEAN13 запрещен к сканирванию'
     When I scan 'GS1_DATABAR_EXP' barcode '0104630037036817310302530010082011190820171908252100001923000'
     Then I see alert title 'Ошибка при сканировании штрих-кода!' and message 'Этот продукт не содержится в документе-основании'
+
+  @Success  
+   Scenario: I scan success barcodes
+   	When I scan 'GS1_DATABAR_EXP' barcode '0104630049291051310300830010082011190820171908252100001923000'
+    Then I see string in table with number '1'
+    And nomenclature name is 'Бедрышко куриное "365 дней", охл.~0,80 кг*10/~8,0 кг/ (подложка, стрейч)Характеристика: Лента'
+    And weight is '8.3'
+    And quantity is '1' 
+    #When I scan 'GS1_DATABAR_EXP' barcode '0104630049291051310300790010082011190820171908252100001923000'
+    #Then I see string in table with number '2'
+    #And nomenclature name is 'Голень куриная "365 дней", охл.~0,80 кг*10/~8,0 кг/ (подложка, стрейч)Характеристика: Лента'
+    #And weight is '7.9'
+    #And quantity is '1' 
+    
+   @Success
+   Scenario: I see ordered items in table
+    When I press on informaiton with order name
+    Then I see table of products for order 'Заказ клиента ЗФER-111187 от 04.12.2019 15:44:11'
+    Then I see string table for product 'Бедрышко куриное' follow
+    	| orderedKg | doneKg 		| leftKg 		| orderedItm 	| doneItm | leftItm |
+    	| 56.0			| ‭65.423‬ 		|	-1.173 		|	7						|	8 			|	-1 			| 
+    	
+    When I press system button back
+    Then screen with order table is closed
+    
+  Scenario: Execute button
