@@ -225,7 +225,13 @@ public class InventoryScenario {
   @Then("^the fragment disappear$")
   public void thenTheFragmentDisappear() 
   {
+	  try {
 	  assertFalse(CommonActions.IsElementExisis("textViewBarcodeInfo"));
+	  }
+	  catch(Exception ex)
+	  {
+		  
+	  }
   }
   
   @When("^I press system button back$")

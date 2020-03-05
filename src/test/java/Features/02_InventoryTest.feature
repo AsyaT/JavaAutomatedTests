@@ -103,6 +103,9 @@ Feature: User at Inventory operation
   	When I press system button back
   	Then the fragment disappear
 
+  Scenario: press button execute
+  
+  
   Scenario: press system button back
   	Given Inventory activity is open
   	When I press system button back
@@ -114,4 +117,4 @@ Feature: User at Inventory operation
   	When I press button 'Назад к списку операций'
   	Then I see operation selection activity screen
 
-  Scenario: press button execute
+

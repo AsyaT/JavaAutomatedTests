@@ -40,7 +40,7 @@ public class ZFermaAndroidDriver {
     			
     			androidDriver = new AndroidDriver(url, capabilities);
     			androidDriver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
-    			androidDriver.manage().timeouts().pageLoadTimeout(60, TimeUnit.SECONDS);
+    			//androidDriver.manage().timeouts().pageLoadTimeout(60, TimeUnit.SECONDS);
 
     			return androidDriver;
     			 

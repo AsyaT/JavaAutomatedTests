@@ -46,11 +46,11 @@ public  class CommonActions {
 		  return resultString.substring(0, resultString.length()-quantity);
 	}
 	
-	 public static Boolean IsElementExisis(String id)
+	 public static Boolean IsElementExisis(String id) throws Exception
 	  {
 		  try 
 		  {
-			  appiumDriver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+			  appiumDriver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
 			  
 			  if(appiumDriver.findElements(By.id(id)).size() == 0)
 			  {
@@ -65,7 +65,7 @@ public  class CommonActions {
 		  }
 		  catch(Exception e)
 		  {
-			  return true;
+			  throw new Exception();
 		  }
 	  }
 }
