@@ -120,8 +120,13 @@ public class RealizationScenario
 
 		  
 		  List<Map<String, String>> list = table.asMaps(String.class, String.class);
+		  
 		  assertEquals(list.get(0).get("orderedKg"), txtOrderdKilos.getText());
-		  assertEquals(list.get(0).get("doneKg"), txtDoneKilos.getText());
+		  
+		  String expectedDoneKg = list.get(0).get("doneKg");
+		  String actualDoneKg = txtDoneKilos.getText();
+		  
+		  assertEquals(expectedDoneKg, actualDoneKg);
 		  assertEquals(list.get(0).get("leftKg"), txtLeftKilos.getText());
 
 		  assertEquals(list.get(0).get("orderedItm"), txtOrderdItems.getText());

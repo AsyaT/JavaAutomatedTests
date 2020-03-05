@@ -46,19 +46,19 @@ Feature: User at realization operation
     And nomenclature name is 'Бедрышко куриное "365 дней", охл.~0,80 кг*10/~8,0 кг/ (подложка, стрейч)Характеристика: Лента'
     And weight is '8.3'
     And quantity is '1' 
-    #When I scan 'GS1_DATABAR_EXP' barcode '0104630049291051310300790010082011190820171908252100001923000'
-    #Then I see string in table with number '2'
-    #And nomenclature name is 'Голень куриная "365 дней", охл.~0,80 кг*10/~8,0 кг/ (подложка, стрейч)Характеристика: Лента'
-    #And weight is '7.9'
-    #And quantity is '1' 
+    When I scan 'GS1_DATABAR_EXP' barcode '0104630049290931310300790010082011190820171908252100001923000'
+    Then I see string in table with number '2'
+    And nomenclature name is 'Голень куриная "365 дней", охл.~0,80 кг*10/~8,0 кг/ (подложка, стрейч)Характеристика: Лента'
+    And weight is '7.9'
+    And quantity is '1' 
     
    @Success
    Scenario: I see ordered items in table
     When I press on informaiton with order name
     Then I see table of products for order 'Заказ клиента ЗФER-111187 от 04.12.2019 15:44:11'
     Then I see string table for product 'Бедрышко куриное' follow
-    	| orderedKg | doneKg 		| leftKg 		| orderedItm 	| doneItm | leftItm |
-    	| 56.0			| ‭65.473 		|	-9.473 		|	7						|	8 			|	-1 			| 
+    	| orderedKg | doneKg | leftKg | orderedItm 	| doneItm | leftItm |
+    	| 56.0 			| ‭65.473 | -9.473 | 7 					| 8 			| -1 			| 
     	
     When I press system button back
     Then screen with order table is closed
