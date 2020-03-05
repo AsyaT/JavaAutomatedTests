@@ -103,17 +103,17 @@ public class RealizationScenario
 	  @Then("^I see string table for product '(.*?)' follow$")
 	  public void thenISeeStringTableForProduct(String productName, DataTable table)
 	  {		  
-		  MobileElement tableRow = appiumDriver.findElement(By.xpath("//[contains(text(),'"+productName+"')]/parent::node()"));
-		  List<MobileElement> linearLayouts = tableRow.findElements(By.xpath("//LinearLayout"));
+		  MobileElement tableRow = appiumDriver.findElement(By.xpath("//android.widget.TableLayout//android.widget.TextView[contains(@text,'"+productName+"')]/parent::node()"));
+		  List<MobileElement> linearLayouts = tableRow.findElements(By.xpath("//android.widget.LinearLayout"));
 		  MobileElement linearLayoutKilos = linearLayouts.get(0);
 		  MobileElement linearLayoutItems = linearLayouts.get(1);
 		  
-		  List<MobileElement> txtsLinearLayoutKilos = linearLayoutKilos.findElements(By.xpath("//TextView"));
+		  List<MobileElement> txtsLinearLayoutKilos = linearLayoutKilos.findElements(By.xpath("//android.widget.TextView"));
 		  MobileElement txtOrderdKilos = txtsLinearLayoutKilos.get(0);
 		  MobileElement txtDoneKilos = txtsLinearLayoutKilos.get(1);
 		  MobileElement txtLeftKilos = txtsLinearLayoutKilos.get(2);
 		  
-		  List<MobileElement> txtsLinearLayoutItems = linearLayoutItems.findElements(By.xpath("//TextView"));
+		  List<MobileElement> txtsLinearLayoutItems = linearLayoutItems.findElements(By.xpath("//android.widget.TextView"));
 		  MobileElement txtOrderdItems = txtsLinearLayoutItems.get(0);
 		  MobileElement txtDoneItems = txtsLinearLayoutItems.get(1);
 		  MobileElement txtLeftItems = txtsLinearLayoutItems.get(2);
