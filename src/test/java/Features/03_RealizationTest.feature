@@ -58,7 +58,7 @@ Feature: User at realization operation
     Then I see table of products for order 'Заказ клиента ЗФER-111187 от 04.12.2019 15:44:11'
     Then I see string table for product 'Бедрышко куриное' follow
     	| orderedKg | doneKg 		| leftKg 		| orderedItm 	| doneItm | leftItm |
-    	| 56.0			| ‭65.423‬ 		|	-1.173 		|	7						|	8 			|	-1 			| 
+    	| 56.0			| ‭65.473 		|	-9.473 		|	7						|	8 			|	-1 			| 
     	
     When I press system button back
     Then screen with order table is closed
