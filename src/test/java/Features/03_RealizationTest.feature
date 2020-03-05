@@ -26,7 +26,6 @@ Feature: User at realization operation
     When I scan 'Code-128' barcode '291671781878991262704239534516498916291'
     Then offer to scan order is closed
     And I see information with order name 'Заказ клиента ЗФER-111187 от 04.12.2019 15:44:11'
-
 @Success
   Scenario: I see ordered items in table
     When I press on informaiton with order name

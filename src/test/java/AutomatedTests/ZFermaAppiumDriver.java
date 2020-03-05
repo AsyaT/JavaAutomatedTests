@@ -38,8 +38,7 @@ public class ZFermaAppiumDriver {
     			URL url = new URL("http://localhost:4723/wd/hub");
     			appiumDriver = new AppiumDriver<MobileElement>(url, capabilities);
     			appiumDriver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
-    			
-    			//androidDriver = new AndroidDriver(url, capabilities);
+    			appiumDriver.manage().timeouts().pageLoadTimeout(60, TimeUnit.SECONDS);
     			
     			return appiumDriver;
     			 

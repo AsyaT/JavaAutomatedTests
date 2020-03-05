@@ -39,7 +39,9 @@ public class ZFermaAndroidDriver {
     			URL url = new URL("http://localhost:4723/wd/hub");
     			
     			androidDriver = new AndroidDriver(url, capabilities);
-    			
+    			androidDriver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
+    			androidDriver.manage().timeouts().pageLoadTimeout(60, TimeUnit.SECONDS);
+
     			return androidDriver;
     			 
 	    		} catch (MalformedURLException e) {

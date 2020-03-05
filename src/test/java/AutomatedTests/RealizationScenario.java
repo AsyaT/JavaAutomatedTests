@@ -6,6 +6,8 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
+import java.util.concurrent.TimeUnit;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 
@@ -60,35 +62,14 @@ public class RealizationScenario
 	  @Then("^offer to scan order is closed$")
 	  public void thenOfferToScanOrderIsClosed()
 	  {
-		  try
-		  {
-			  MobileElement inviteMessage = appiumDriver.findElement(By.id("txtFragmentOrderScanError"));
-			  if(inviteMessage != null)
-			  {
-				  assertFalse(inviteMessage.isDisplayed());
-			  }
-		  }
-		  catch (Exception e)
-		  {
-			  assertTrue(true);
-		  }
+		  assertFalse(CommonActions.IsElementExisis("txtOfferToScanOrder"));
 	  }
+	 
 	  
 	  @Then("^screen with order table is closed$")
 	  public void thenScreenWithOrderTableIsClosed()
 	  {
-		  try
-		  {
-			  MobileElement inviteMessage = appiumDriver.findElement(By.id("txtProgressOrderName"));
-			  if(inviteMessage != null)
-			  {
-				  assertFalse(inviteMessage.isDisplayed());
-			  }
-		  }
-		  catch (Exception e)
-		  {
-			  assertTrue(true);
-		  }
+		  assertFalse(CommonActions.IsElementExisis("txtProgressOrderName"));
 		  
 	  }
 	  
@@ -99,7 +80,7 @@ public class RealizationScenario
 		  fragmentOrderName.click();
 	  }
 	  
-	  @Then("^I see table of products for order (.*?)$")
+	  @Then("^I see table of products for order '(.*?)'$")
 	  public void thenISeeTableWithOrdersProducts(String orderName)
 	  {
 		  MobileElement txtOrderName = appiumDriver.findElement(By.id("txtProgressOrderName"));

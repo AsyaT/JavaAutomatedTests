@@ -19,6 +19,8 @@ import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.android.nativekey.AndroidKey;
+import io.appium.java_client.android.nativekey.KeyEvent;
 import io.appium.java_client.touch.offset.PointOption;
 import cucumber.api.java.en.Then;
 
@@ -33,31 +35,7 @@ public class InventoryScenario {
 		androidDriver = ZFermaAndroidDriver.getInstance().getAndroidDriver();
 	}
 	
-	public String RemoveLineBreakes(String input)
-	{
-		byte[] nomInBytes = input.getBytes(StandardCharsets.UTF_8);
-		
-		  byte[] result = new byte[nomInBytes.length];
-		  int i = 0;
-		  int quantity = 0;
-		  for (byte b : nomInBytes)
-		  {
-			  if(b == 10)
-			  {
-				  quantity++;
-			  }
-			  else
-			  {
-				  result[i] = b;
-				  i++;
-			  }
-			 
-		  }
-		  
-		  String resultString = new String(result, StandardCharsets.UTF_8);
-		  
-		  return resultString.substring(0, resultString.length()-quantity);
-	}
+	
 	
   @Given("^Inventory activity is open$")
   public void givenInventoryActivityIsOpen() throws Throwable {
@@ -149,7 +127,7 @@ public class InventoryScenario {
   {
 	  String nomenclature = fourTextViews.get(1).getText();
 	  
-	  String calculatingElement = RemoveLineBreakes(nomenclature);
+	  String calculatingElement = CommonActions.RemoveLineBreakes(nomenclature);
 	  
 	  assertEquals(nomenclatureName, calculatingElement);
   }
@@ -188,7 +166,7 @@ public class InventoryScenario {
 		  MobileElement lineToChooseElement = listOfProducts.get(lineNumber-1);
 		  
 		  String lineToChoseName = lineToChooseElement.getText();
-		  String fixedLine = RemoveLineBreakes(lineToChoseName);
+		  String fixedLine = CommonActions.RemoveLineBreakes(lineToChoseName);
 		  
 		  assertEquals(fullName, fixedLine);
 		  
@@ -240,30 +218,20 @@ public class InventoryScenario {
 	  assertNotNull(fragment);
 	  
 	  MobileElement text = appiumDriver.findElement(By.id("textViewBarcodeInfo"));
-	  assertEquals(message, RemoveLineBreakes(text.getText()));
+	  assertEquals(message, CommonActions.RemoveLineBreakes(text.getText()));
   }
   
   
   @Then("^the fragment disappear$")
   public void thenTheFragmentDisappear() 
   {
-	  try
-	  {
-		  MobileElement inviteMessage = appiumDriver.findElement(By.id("textViewBarcodeInfo"));
-		  if(inviteMessage != null)
-		  {
-			  assertFalse(inviteMessage.isDisplayed());
-		  }
-	  }
-	  catch (Exception e)
-	  {
-		  assertTrue(true);
-	  }
+	  assertFalse(CommonActions.IsElementExisis("textViewBarcodeInfo"));
   }
   
   @When("^I press system button back$")
   public void whenIPressSystemButtonBack()
   {
-	  appiumDriver.navigate().back();
+	  KeyEvent backEvent = new KeyEvent(AndroidKey.BACK);
+	  androidDriver.pressKey(backEvent);
   }
 }
