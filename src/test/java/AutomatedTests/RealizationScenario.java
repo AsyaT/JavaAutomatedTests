@@ -123,7 +123,7 @@ public class RealizationScenario
 		  
 		  assertEquals(list.get(0).get("orderedKg"), txtOrderdKilos.getText());
 		  
-		  String expectedDoneKg = list.get(0).get("doneKg");
+		  String expectedDoneKg = CommonActions.RemoveSpaces(list.get(0).get("doneKg"));
 		  String actualDoneKg = txtDoneKilos.getText();
 		  
 		  assertEquals(expectedDoneKg, actualDoneKg);
