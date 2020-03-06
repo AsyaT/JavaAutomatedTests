@@ -129,6 +129,19 @@ public class SettingsTestScenario {
   @Then("^I see operation selection activity screen")
   public void thenIseeOperationSelectionActivity()
   {
+	  int counter = 0;
+	  while(androidDriver.currentActivity().contains("OperationSelection") == false) 
+	  {
+	      try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	      counter++;
+	      if ( counter >= 10 ) break;
+	  }
+	  
 	  assertEquals(".OperationSelectionActivity", androidDriver.currentActivity());
   }
 

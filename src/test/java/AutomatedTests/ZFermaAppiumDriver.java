@@ -33,6 +33,7 @@ public class ZFermaAppiumDriver {
     		capabilities.setCapability("deviceName", "Zebra MC33");
     		capabilities.setCapability("platformVersion", "7.1");
     		capabilities.setCapability("app", "C:\\AndroidProjects\\ZebraScanner\\app\\build\\outputs\\apk\\debug\\app-debug.apk");
+    		capabilities.setCapability("newCommandTimeout", 300);
     		
     		try {
     			URL url = new URL("http://localhost:4723/wd/hub");
