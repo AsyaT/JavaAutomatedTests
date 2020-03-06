@@ -32,7 +32,7 @@ public class AcceptanceScenario {
 	@Then("^I see Acceptance activity$")
 	 public void thenISeeRealizationActivity() throws Throwable 
 	 {
-		  assertEquals(".RealizationActivity", androidDriver.currentActivity());
+		  assertEquals(".AcceptanceActivity", androidDriver.currentActivity());
 	 }
 	
 	@When("I select '(.*?)' in list of accounting areas$")

@@ -10,15 +10,6 @@ Feature: User at acceptance operation
   Scenario: I press system back button once
     Given I see offer to scan order 'СКАНИРУЙТЕ ШТРИХ-КОД ДОКУМЕНТА-ОСНОВАНИЯ'
     When I press system button back
-    Then I see AccountingAreaSelection activity
-    When I select 'Приемка на 6-4-2' in list of accounting areas
-    Then I see Acceptance activity
-
-  Scenario: I press system back button twice
-    Given I see offer to scan order 'СКАНИРУЙТЕ ШТРИХ-КОД ДОКУМЕНТА-ОСНОВАНИЯ'
-    When I press system button back
-    Then I see AccountingAreaSelection activity
-    When I press system button back
     Then I see operation selection activity screen
     When I select 'Приемка' in list of operation types
     Then I see AccountingAreaSelection activity
@@ -32,7 +23,6 @@ Feature: User at acceptance operation
     When I scan 'Code-128' barcode '296023429174452073866327149433046492099'
     Then I see offer scan order fragment with message 'Нельзя использовать Заказ клиента в статусе Закрыт!'
 
-  @Success
   Scenario: I scan correct order
     Given I see offer to scan order 'СКАНИРУЙТЕ ШТРИХ-КОД ДОКУМЕНТА-ОСНОВАНИЯ'
     When I scan 'Code-128' barcode ''
