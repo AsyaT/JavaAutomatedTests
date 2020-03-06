@@ -70,5 +70,21 @@ Feature: User at realization operation
     Then I see string in table with number '1'
     And nomenclature name is 'Бедрышко куриное "365 дней", охл.~0,80 кг*10/~8,0 кг/ (подложка, стрейч)Характеристика: Лента'
     Then I do not see string in table with number '2' 
+    
+  Scenario: I see ordered items in table
+    When I press on informaiton with order name
+    Then I see table of products for order 'Заказ клиента ЗФER-111187 от 04.12.2019 15:44:11'
+    Then I see string table for product 'Бедрышко куриное' follow
+      | orderedKg | doneKg  | leftKg | orderedItm | doneItm | leftItm |
+      |        56 | ‭65,473 	| -9,473 |          7 |       8 |      -1 |
+    Then I see string table for product 'Голень куриная' follow
+      | orderedKg | doneKg | leftKg  | orderedItm | doneItm | leftItm |
+      |        56 | 59,513 | -3,513 |          7 |       7 |      0 |
+    When I press system button back
+    Then screen with order table is closed
 
+  Scenario: remove all strings
+  	When I press button 'Удалить всё'
+  	Then the table is empty
+  	
   Scenario: Execute button

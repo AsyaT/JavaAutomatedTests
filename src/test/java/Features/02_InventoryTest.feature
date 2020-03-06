@@ -77,6 +77,8 @@ Feature: User at Inventory operation
   	When I press button 'Удалить строку'
   	Then I see string in table with number '4'
   	And nomenclature name is 'Печень куриная, "Здоровая Ферма", зам., 0,5 кг*12/ 6,0 кг/ (подложка, стрейч)Характеристика: Тандер'
+  	Then I see string in table with number '5'
+  	And nomenclature name is 'Бедрышко куриное, "Здоровая Ферма", зам., ~0,8 кг*10/ 8,0 кг/ (подложка, стрейч)Характеристика: базовая'
   	
   Scenario: remove several strings
   	When I press string number '1'
