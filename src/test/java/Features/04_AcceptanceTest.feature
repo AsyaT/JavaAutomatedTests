@@ -1,16 +1,29 @@
+@Success
+Feature: User at acceptance operation
 
-Feature: User at realization operation
+  Scenario: Open acceptance activity
+    When I select 'Приемка' in list of operation types
+    Then I see AccountingAreaSelection activity
+    When I select 'Приемка на 6-4-1' in list of accounting areas
+    Then I see Acceptance activity
 
-  Scenario: Open realization activity
-    When I select 'Реализация' in list of operation types
-    Then I see Realization activity
-
-  Scenario: I press system back button
+  Scenario: I press system back button once
     Given I see offer to scan order 'СКАНИРУЙТЕ ШТРИХ-КОД ДОКУМЕНТА-ОСНОВАНИЯ'
     When I press system button back
+    Then I see AccountingAreaSelection activity
+    When I select 'Приемка на 6-4-2' in list of accounting areas
+    Then I see Acceptance activity
+
+  Scenario: I press system back button twice
+    Given I see offer to scan order 'СКАНИРУЙТЕ ШТРИХ-КОД ДОКУМЕНТА-ОСНОВАНИЯ'
+    When I press system button back
+    Then I see AccountingAreaSelection activity
+    When I press system button back
     Then I see operation selection activity screen
-    When I select 'Реализация' in list of operation types
-    Then I see Realization activity
+    When I select 'Приемка' in list of operation types
+    Then I see AccountingAreaSelection activity
+    When I select 'Приемка на 6-4-1' in list of accounting areas
+    Then I see Acceptance activity
 
   Scenario: I scan wrong order or not order
     Given I see offer to scan order 'СКАНИРУЙТЕ ШТРИХ-КОД ДОКУМЕНТА-ОСНОВАНИЯ'
@@ -19,11 +32,12 @@ Feature: User at realization operation
     When I scan 'Code-128' barcode '296023429174452073866327149433046492099'
     Then I see offer scan order fragment with message 'Нельзя использовать Заказ клиента в статусе Закрыт!'
 
+  @Success
   Scenario: I scan correct order
     Given I see offer to scan order 'СКАНИРУЙТЕ ШТРИХ-КОД ДОКУМЕНТА-ОСНОВАНИЯ'
-    When I scan 'Code-128' barcode '291671781878991262704239534516498916291'
+    When I scan 'Code-128' barcode ''
     Then offer to scan order is closed
-    And I see information with order name 'Заказ клиента ЗФER-111187 от 04.12.2019 15:44:11'
+    And I see information with order name ''
 
   Scenario: I scan package list
 
@@ -37,64 +51,63 @@ Feature: User at realization operation
     Then I see alert title 'Ошибка при сканировании штрих-кода!' and message 'Этот продукт не содержится в документе-основании'
 
   Scenario: I scan success barcodes
-    When I scan 'GS1_DATABAR_EXP' barcode '0104630049291051310300830010082011190820171908252100001923000'
+    When I scan 'GS1_DATABAR_EXP' barcode ''
     Then I see string in table with number '1'
-    And nomenclature name is 'Бедрышко куриное "365 дней", охл.~0,80 кг*10/~8,0 кг/ (подложка, стрейч)Характеристика: Лента'
+    And nomenclature name is ''
     And weight is '8.3'
     And quantity is '1'
-    When I scan 'GS1_DATABAR_EXP' barcode '0104630049290931310300790010082011190820171908252100001923000'
+    When I scan 'GS1_DATABAR_EXP' barcode ''
     Then I see string in table with number '2'
-    And nomenclature name is 'Голень куриная "365 дней", охл.~0,80 кг*10/~8,0 кг/ (подложка, стрейч)Характеристика: Лента'
+    And nomenclature name is ''
     And weight is '7.9'
     And quantity is '1'
 
   Scenario: I see ordered items in table
     When I press on informaiton with order name
-    Then I see table of products for order 'Заказ клиента ЗФER-111187 от 04.12.2019 15:44:11'
-    Then I see string table for product 'Бедрышко куриное' follow
+    Then I see table of products for order ''
+    Then I see string table for product '' follow
       | orderedKg | doneKg  | leftKg | orderedItm | doneItm | leftItm |
-      |        56 | ‭65,473 	| -9,473 |          7 |       8 |      -1 |
-    Then I see string table for product 'Голень куриная' follow
+      |        56 | ‭65,473 | -9,473 |          7 |       8 |      -1 |
+    Then I see string table for product '' follow
       | orderedKg | doneKg | leftKg  | orderedItm | doneItm | leftItm |
       |        56 | 67,413 | -11,413 |          7 |       8 |      -1 |
     When I press system button back
     Then screen with order table is closed
-
 
   Scenario: remove selected string
     When I press string number '2'
     Then String number '2' is highlighted with yellow color
     When I press button 'Удалить строку'
     Then I see string in table with number '1'
-    And nomenclature name is 'Бедрышко куриное "365 дней", охл.~0,80 кг*10/~8,0 кг/ (подложка, стрейч)Характеристика: Лента'
-    Then I do not see string in table with number '2' 
-    
+    And nomenclature name is ''
+    Then I do not see string in table with number '2'
+
   Scenario: I see ordered items in table
     When I press on informaiton with order name
-    Then I see table of products for order 'Заказ клиента ЗФER-111187 от 04.12.2019 15:44:11'
+    Then I see table of products for order ''
     Then I see string table for product 'Бедрышко куриное' follow
       | orderedKg | doneKg  | leftKg | orderedItm | doneItm | leftItm |
-      |        56 | ‭65,473 	| -9,473 |          7 |       8 |      -1 |
+      |        56 | ‭65,473 | -9,473 |          7 |       8 |      -1 |
     Then I see string table for product 'Голень куриная' follow
-      | orderedKg | doneKg | leftKg  | orderedItm | doneItm | leftItm |
-      |        56 | 59,513 | -3,513 |          7 |       7 |      0 |
+      | orderedKg | doneKg | leftKg | orderedItm | doneItm | leftItm |
+      |        56 | 59,513 | -3,513 |          7 |       7 |       0 |
     When I press system button back
     Then screen with order table is closed
 
   Scenario: remove all strings
-  	When I press button 'Удалить всё'
-  	Then the table is empty
-  	
-  	Scenario: I see ordered items in table
+    When I press button 'Удалить всё'
+    Then the table is empty
+
+  Scenario: I see ordered items in table
     When I press on informaiton with order name
-    Then I see table of products for order 'Заказ клиента ЗФER-111187 от 04.12.2019 15:44:11'
-    Then I see string table for product 'Бедрышко куриное' follow
+    Then I see table of products for order ''
+    Then I see string table for product '' follow
       | orderedKg | doneKg  | leftKg | orderedItm | doneItm | leftItm |
-      |        56 | ‭57,173 	| -1,173 |          7 |       7 |      0 |
-    Then I see string table for product 'Голень куриная' follow
-      | orderedKg | doneKg | leftKg  | orderedItm | doneItm | leftItm |
-      |        56 | 59,513 | -3,513 |          7 |       7 |      0 |
+      |        56 | ‭57,173 | -1,173 |          7 |       7 |       0 |
+    Then I see string table for product ' follow
+      | orderedKg | doneKg | leftKg | orderedItm | doneItm | leftItm |
+      |        56 | 59,513 | -3,513 |          7 |       7 |       0 |
     When I press system button back
     Then screen with order table is closed
-  	
+
   Scenario: Execute button
