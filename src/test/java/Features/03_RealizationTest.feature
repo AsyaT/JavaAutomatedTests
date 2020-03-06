@@ -1,3 +1,4 @@
+@Success
 Feature: User at realization operation
 
   @Success
@@ -62,7 +63,7 @@ Feature: User at realization operation
     When I press system button back
     Then screen with order table is closed
 
-  @Success
+
   Scenario: remove selected string
     When I press string number '2'
     Then String number '2' is highlighted with yellow color
@@ -86,5 +87,17 @@ Feature: User at realization operation
   Scenario: remove all strings
   	When I press button 'Удалить всё'
   	Then the table is empty
+  	
+  	Scenario: I see ordered items in table
+    When I press on informaiton with order name
+    Then I see table of products for order 'Заказ клиента ЗФER-111187 от 04.12.2019 15:44:11'
+    Then I see string table for product 'Бедрышко куриное' follow
+      | orderedKg | doneKg  | leftKg | orderedItm | doneItm | leftItm |
+      |        56 | ‭57,173 	| -1,173 |          7 |       7 |      0 |
+    Then I see string table for product 'Голень куриная' follow
+      | orderedKg | doneKg | leftKg  | orderedItm | doneItm | leftItm |
+      |        56 | 59,513 | -3,513 |          7 |       7 |      0 |
+    When I press system button back
+    Then screen with order table is closed
   	
   Scenario: Execute button
