@@ -122,6 +122,13 @@ public class InventoryScenario {
 	  
   }
   
+  @Then("^I do not see string in table with number '(.*?)'$")
+  public void thenIDontSeeStringInTable(Integer stringNumber)
+  {
+	  MobileElement scannedStringLinearLayout = GetListViewString(stringNumber);
+	  assertNull(scannedStringLinearLayout);
+  }
+  
   @And("^nomenclature name is '(.*?)'$")
   public void andNomenclatureIs(String nomenclatureName)
   {
