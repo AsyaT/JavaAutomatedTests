@@ -1,12 +1,12 @@
-@Success
-Feature: User at acceptance operation
 
+Feature: User at acceptance operation
+@Success
   Scenario: Open acceptance activity
     When I select 'Приемка' in list of operation types
     Then I see AccountingAreaSelection activity
     When I select 'Приемка на 6-4-1' in list of accounting areas
     Then I see Acceptance activity
-
+@Success
   Scenario: I press system back button once
     Given I see offer to scan order 'СКАНИРУЙТЕ ШТРИХ-КОД ДОКУМЕНТА-ОСНОВАНИЯ'
     When I press system button back
@@ -15,7 +15,7 @@ Feature: User at acceptance operation
     Then I see AccountingAreaSelection activity
     When I select 'Приемка на 6-4-1' in list of accounting areas
     Then I see Acceptance activity
-
+@Success
   Scenario: I scan wrong order or not order
     Given I see offer to scan order 'СКАНИРУЙТЕ ШТРИХ-КОД ДОКУМЕНТА-ОСНОВАНИЯ'
     When I scan 'EAN13' barcode '4603502137574'
