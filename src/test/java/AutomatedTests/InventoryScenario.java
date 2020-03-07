@@ -7,9 +7,12 @@ import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 import java.nio.charset.StandardCharsets;
+import java.time.Duration;
+import java.util.HashMap;
 import java.util.List;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 
 import cucumber.api.java.en.And;
@@ -21,6 +24,7 @@ import io.appium.java_client.TouchAction;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.nativekey.AndroidKey;
 import io.appium.java_client.android.nativekey.KeyEvent;
+import io.appium.java_client.touch.WaitOptions;
 import io.appium.java_client.touch.offset.PointOption;
 import cucumber.api.java.en.Then;
 
@@ -116,6 +120,34 @@ public class InventoryScenario {
   public void thenISeeStringInTableWithNumber(Integer stringNumber)
   {
 	  MobileElement scannedStringLinearLayout = GetListViewString(stringNumber);
+	  
+	  if(scannedStringLinearLayout == null)
+	  {
+		  Integer scrollLimit = 30;
+		  
+		  MobileElement listView = appiumDriver.findElement(By.id("listViewProductContainer"));
+		  
+		  while(scannedStringLinearLayout == null && scrollLimit > 0)
+		  {  
+			  if (listView != null ) 
+			  {
+				  int middleX = listView.getLocation().getX() + listView.getSize().getWidth() / 2;
+		          int upperY = listView.getLocation().getY();
+		          int lowerY = upperY + listView.getSize().getHeight() - 50;     
+				   
+		        
+				   new TouchAction(appiumDriver)
+				   .press(PointOption.point(middleX, lowerY))
+				   .waitAction(WaitOptions.waitOptions(Duration.ofSeconds(2)))
+				   .moveTo(PointOption.point(middleX, upperY))
+				   .release()
+				   .perform();
+				   
+			  }
+			  scannedStringLinearLayout = GetListViewString(stringNumber);
+		  }
+	  }
+	  
 	  fourTextViews = scannedStringLinearLayout.findElements(By.xpath("//android.widget.TextView"));
 	  
 	  assertEquals(stringNumber.toString(),fourTextViews.get(0).getText());
