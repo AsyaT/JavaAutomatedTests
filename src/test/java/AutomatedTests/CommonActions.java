@@ -14,6 +14,8 @@ import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.android.nativekey.AndroidKey;
+import io.appium.java_client.android.nativekey.KeyEvent;
 import io.appium.java_client.touch.WaitOptions;
 import io.appium.java_client.touch.offset.PointOption;
 
@@ -81,6 +83,18 @@ public  class CommonActions {
 	      alertButton.click();
 	  }
 
+	  @Then("^I see alert title '(.*?)' and message '(.*?)'$")
+	  public void thenIseeAlertMessage(String title, String message)
+	  {
+		  MobileElement alertTitle = appiumDriver.findElement(By.id("android:id/alertTitle"));
+	      assertEquals(title, alertTitle.getText());
+	      
+	      MobileElement alertMessage = appiumDriver.findElement(By.id("android:id/message"));
+	      assertEquals(message, alertMessage.getText());
+
+	      MobileElement alertButton = appiumDriver.findElement(By.id("android:id/button1"));
+	      alertButton.click();
+	  }
 	  
 	  @Then("^I see operation selection activity screen")
 	  public void thenIseeOperationSelectionActivity()
@@ -99,6 +113,13 @@ public  class CommonActions {
 		  }
 		  
 		  assertEquals(".OperationSelectionActivity", androidDriver.currentActivity());
+	  }
+	  
+	  @When("^I press system button back$")
+	  public void whenIPressSystemButtonBack()
+	  {
+		  KeyEvent backEvent = new KeyEvent(AndroidKey.BACK);
+		  androidDriver.pressKey(backEvent);
 	  }
 	  
 	public static String RemoveLineBreakes(String input)
