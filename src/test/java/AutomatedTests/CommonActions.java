@@ -99,9 +99,5 @@ public  class CommonActions {
 		  }
 	  }
 	 
-	 public static void ScrollListView(MobileElement listView)
-	 {
-		 
-		 
-	 }
+	 
 }

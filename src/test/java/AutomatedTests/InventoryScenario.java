@@ -117,6 +117,27 @@ public class InventoryScenario {
 	  return null;
   }
   
+  public static void ScrollListView(String listViewId)
+	 {
+		 
+		 MobileElement listView = appiumDriver.findElement(By.id(listViewId));
+		  if (listView != null ) 
+		  {
+			  int middleX = listView.getLocation().getX() + listView.getSize().getWidth() / 2;
+	          int upperY = listView.getLocation().getY();
+	          int lowerY = upperY + listView.getSize().getHeight() - 50;     
+			   
+	        
+			   new TouchAction(appiumDriver)
+			   .press(PointOption.point(middleX, lowerY))
+			   .waitAction(WaitOptions.waitOptions(Duration.ofSeconds(2)))
+			   .moveTo(PointOption.point(middleX, upperY))
+			   .release()
+			   .perform();
+			   
+		  }
+	 }
+  
   List<MobileElement> fourTextViews = null;
   
   @Then("^I see string in table with number '(.*?)'$")
@@ -130,22 +151,7 @@ public class InventoryScenario {
 		  
 		  while(scannedStringLinearLayout == null && scrollLimit > 0)
 		  {  
-			  MobileElement listView = appiumDriver.findElement(By.id("listViewProductContainer"));
-			  if (listView != null ) 
-			  {
-				  int middleX = listView.getLocation().getX() + listView.getSize().getWidth() / 2;
-		          int upperY = listView.getLocation().getY();
-		          int lowerY = upperY + listView.getSize().getHeight() - 50;     
-				   
-		        
-				   new TouchAction(appiumDriver)
-				   .press(PointOption.point(middleX, lowerY))
-				   .waitAction(WaitOptions.waitOptions(Duration.ofSeconds(2)))
-				   .moveTo(PointOption.point(middleX, upperY))
-				   .release()
-				   .perform();
-				   
-			  }
+			  ScrollListView("listViewProductContainer");
 			  
 			  scannedStringLinearLayout = GetListViewString(stringNumber);
 			  scrollLimit--;
