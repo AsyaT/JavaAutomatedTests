@@ -42,41 +42,24 @@ public class ListViewInstructions {
 	      MobileElement btnDoScan = appiumDriver.findElement(By.id("btnDoScan"));
 	      btnDoScan.click();
 	  }
-
-	  @When("I select '(.*?)' in list of operation types$")
-	  public void whenIselectInListOfOperationTypes(String tapListName) throws Throwable 
+	  
+	  private List<MobileElement> GetListViewStrings()
 	  {
-		  List<MobileElement> listView = appiumDriver.findElements(By.xpath("//android.widget.ListView//android.widget.LinearLayout"));
-
-	      for (MobileElement element : listView)
-	      {
-	          MobileElement textElement = element.findElement(By.xpath("//android.widget.TextView"));
-	          if (textElement.getText().equalsIgnoreCase(tapListName))
-	          {
-	              element.click();
-	          }
-	      }
-
-	      MobileElement okButton = appiumDriver.findElement(By.id("OKButton"));
-	      okButton.click();
-
+		  MobileElement listView = appiumDriver.findElement(By.id("listViewProductContainer"));
+	  	  
+		  return listView.findElements(By.className("android.widget.LinearLayout"));
 	  }
 	  
 	  private MobileElement GetListViewString(Integer stringNumber)
 	  {
-		  MobileElement listView = appiumDriver.findElement(By.id("listViewProductContainer"));
-		  	  
-		  List<MobileElement> listViewScanStrings = listView.findElements(By.className("android.widget.LinearLayout"));
+		  List<MobileElement> listViewScanStrings = GetListViewStrings();
 			 
-		  // i=1 because listViewScanTable[0] = header
-		  	  
-		  for(int i = 1 ; i < listViewScanStrings.size() ; i ++ )
-		  {
-			  MobileElement stringTextViews = listViewScanStrings.get(i);
-			  List<MobileElement> allTextViewsInString = stringTextViews.findElements(By.xpath("//android.widget.TextView"));
+		  for (MobileElement scanString : listViewScanStrings)
+	      {
+			  List<MobileElement> allTextViewsInString = scanString.findElements(By.xpath("//android.widget.TextView"));
 			  if(allTextViewsInString.get(0).getText().equalsIgnoreCase(stringNumber.toString()))
 			  {
-				  return stringTextViews;
+				  return scanString;
 			  }
 		  }
 		  
@@ -186,7 +169,7 @@ public class ListViewInstructions {
 	  @Then("^the table is empty$")
 	  public void thenTheTableIsEmpty()
 	  {
-		  List<MobileElement> listViewScanTable = appiumDriver.findElements(By.xpath("//android.widget.ListView//android.widget.LinearLayout"));
+		  List<MobileElement> listViewScanTable = GetListViewStrings();
 		  
 		  Integer headerElement = 1;
 		  
