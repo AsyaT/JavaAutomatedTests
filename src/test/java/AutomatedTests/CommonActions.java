@@ -1,13 +1,17 @@
 package AutomatedTests;
 
 import java.nio.charset.StandardCharsets;
+import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
+import io.appium.java_client.TouchAction;
 import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.touch.WaitOptions;
+import io.appium.java_client.touch.offset.PointOption;
 
 public  class CommonActions {
 
@@ -94,4 +98,10 @@ public  class CommonActions {
 			  throw new Exception();
 		  }
 	  }
+	 
+	 public static void ScrollListView(MobileElement listView)
+	 {
+		 
+		 
+	 }
 }

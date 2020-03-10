@@ -1,6 +1,6 @@
 
 Feature: I select 'По заказу' in dialog on Package list activity
-@Success
+
   Scenario: I select correct option
     Given I see offer to select action in dialog 'Выберете действие'
       | Без документа-основания |
@@ -15,7 +15,7 @@ Feature: I select 'По заказу' in dialog on Package list activity
     When I scan 'Code-128' barcode '296023429174452073866327149433046492099'
     Then I see offer scan order fragment with message 'Нельзя использовать Заказ клиента в статусе Закрыт!'
 
-@Success
+
   Scenario: I scan correct order
     Given I see offer to scan order 'СКАНИРУЙТЕ ШТРИХ-КОД ДОКУМЕНТА-ОСНОВАНИЯ'
     When I scan 'Code-128' barcode '233907567175534467144053627894934209161'
@@ -64,7 +64,6 @@ Feature: I select 'По заказу' in dialog on Package list activity
     When I press button 'Удалить строку'
     Then the table is empty
 
-    @Success
     Scenario: press button back to list of operations
     When I press button 'Назад к списку операций'
   	Then I see operation selection activity screen

@@ -97,21 +97,24 @@ public class InventoryScenario {
   private MobileElement GetListViewString(Integer stringNumber)
   {
 	  MobileElement listView = appiumDriver.findElement(By.id("listViewProductContainer"));
-	  
-	  List<MobileElement> listViewScanTable = listView.findElements(By.className("android.widget.LinearLayout"));
-	 
+	  	  
+	  List<MobileElement> listViewScanStrings = listView.findElements(By.className("android.widget.LinearLayout"));
+		 
 	  //because listViewScanTable[0] = header
 	  
-	  if(stringNumber< listViewScanTable.size())
+	  Integer maxLinesOnScreen = 6;
+	  	  
+	  for(int i = 1 ; i < maxLinesOnScreen; i ++ )
 	  {
-		  	return listViewScanTable.get(stringNumber);
-	  }
-	  else 
-	  {
-
-		  return null;
+		  MobileElement stringTextViews = listViewScanStrings.get(i);
+		  List<MobileElement> allTextViewsInString = stringTextViews.findElements(By.xpath("//android.widget.TextView"));
+		  if(allTextViewsInString.get(0).getText().equalsIgnoreCase(stringNumber.toString()))
+		  {
+			  return stringTextViews;
+		  }
 	  }
 	  
+	  return null;
   }
   
   List<MobileElement> fourTextViews = null;
@@ -125,10 +128,9 @@ public class InventoryScenario {
 	  {
 		  Integer scrollLimit = 30;
 		  
-		  MobileElement listView = appiumDriver.findElement(By.id("listViewProductContainer"));
-		  
 		  while(scannedStringLinearLayout == null && scrollLimit > 0)
 		  {  
+			  MobileElement listView = appiumDriver.findElement(By.id("listViewProductContainer"));
 			  if (listView != null ) 
 			  {
 				  int middleX = listView.getLocation().getX() + listView.getSize().getWidth() / 2;
@@ -144,7 +146,9 @@ public class InventoryScenario {
 				   .perform();
 				   
 			  }
+			  
 			  scannedStringLinearLayout = GetListViewString(stringNumber);
+			  scrollLimit--;
 		  }
 	  }
 	  
