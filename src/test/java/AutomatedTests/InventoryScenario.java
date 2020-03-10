@@ -100,11 +100,9 @@ public class InventoryScenario {
 	  	  
 	  List<MobileElement> listViewScanStrings = listView.findElements(By.className("android.widget.LinearLayout"));
 		 
-	  //because listViewScanTable[0] = header
-	  
-	  Integer maxLinesOnScreen = 6;
+	  // i=1 because listViewScanTable[0] = header
 	  	  
-	  for(int i = 1 ; i < maxLinesOnScreen; i ++ )
+	  for(int i = 1 ; i < listViewScanStrings.size() ; i ++ )
 	  {
 		  MobileElement stringTextViews = listViewScanStrings.get(i);
 		  List<MobileElement> allTextViewsInString = stringTextViews.findElements(By.xpath("//android.widget.TextView"));

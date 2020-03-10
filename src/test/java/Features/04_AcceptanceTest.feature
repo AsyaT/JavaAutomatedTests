@@ -31,7 +31,7 @@ Feature: User at acceptance operation
   Scenario: I scan package list
 
   Scenario: Do scan error barcodes
-    Then I see Realization activity
+    Then I see Acceptance activity
     When I scan 'EAN13' barcode '4603502137574'
     Then I see alert title 'Ошибка при сканировании штрих-кода!' and message 'Тип LocalEAN13 запрещен к сканирванию'
     When I scan 'EAN13' barcode '2209983009489'
@@ -100,3 +100,7 @@ Feature: User at acceptance operation
     Then screen with order table is closed
 
   Scenario: Execute button
+
+  Scenario: press button back to list of operations
+  	When I press button 'Назад к списку операций'
+  	Then I see operation selection activity screen

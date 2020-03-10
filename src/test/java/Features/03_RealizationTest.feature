@@ -98,3 +98,7 @@ Feature: User at realization operation
     Then screen with order table is closed
   	
   Scenario: Execute button
+
+  Scenario: press button back to list of operations
+  	When I press button 'Назад к списку операций'
+  	Then I see operation selection activity screen
