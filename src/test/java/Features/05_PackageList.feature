@@ -1,7 +1,6 @@
 
 Feature: I open Package list operation
 
-@Success
   Scenario: Open Inventory scan activity
     When I select 'Упаковочный лист' in list of operation types
     Then I see Package list activity

@@ -1,5 +1,3 @@
-@Success
-
 Feature: I select 'Без документа-основания' in dialog on Package list activity
 
   Scenario: I select correct option

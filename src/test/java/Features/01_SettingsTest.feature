@@ -1,4 +1,4 @@
-@Success
+
 Feature: Settings
 	User do scanning on Inventory operation
 
@@ -16,6 +16,7 @@ Scenario: Wants to input incorrect settings
 	When I press button 'Выберите операцию'
 	Then I see error screen 'Сервер не отвечает.'
 
+@Success
 Scenario: Wants to input correct settings
 	When I press button 'Настройки'
 	And I enter IP adress '10.74.255.29'
