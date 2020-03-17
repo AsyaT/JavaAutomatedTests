@@ -1,4 +1,4 @@
-@Success
+
 Feature: User at Inventory operation
   User scan different barcodes
 
