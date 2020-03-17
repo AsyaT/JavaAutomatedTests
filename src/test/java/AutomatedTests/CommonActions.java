@@ -1,7 +1,9 @@
 package AutomatedTests;
 
+import java.io.Console;
 import java.nio.charset.StandardCharsets;
 import java.util.concurrent.TimeUnit;
+import java.util.logging.ConsoleHandler;
 
 import org.openqa.selenium.By;
 
@@ -10,17 +12,6 @@ import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
 
 public  class CommonActions {
-
-	static AppiumDriver<MobileElement> appiumDriver;
-	static AndroidDriver androidDriver;
-	
-	public CommonActions()
-	{
-		appiumDriver = ZFermaAppiumDriver.getInstance().getAppiumDriver();
-		androidDriver = ZFermaAndroidDriver.getInstance().getAndroidDriver();
-	}
-	
-	 
 	  
 	public static String RemoveLineBreakes(String input)
 	{
@@ -74,28 +65,6 @@ public  class CommonActions {
 		  return resultString.substring(0, resultString.length()-quantity);
 	}
 	
-	 public static Boolean IsElementExisis(String id) throws Exception
-	  {
-		  try 
-		  {
-			  appiumDriver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
-			  
-			  if(appiumDriver.findElements(By.id(id)).size() == 0)
-			  {
-				  appiumDriver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
-				  return false;
-			  }
-			  else
-			  {
-				  appiumDriver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
-				  return true;
-			  }
-		  }
-		  catch(Exception e)
-		  {
-			  throw new Exception();
-		  }
-	  }
-	 
+	
 	 
 }

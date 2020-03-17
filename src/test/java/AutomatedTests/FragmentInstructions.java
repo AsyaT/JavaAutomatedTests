@@ -43,7 +43,7 @@ public class FragmentInstructions {
 	  public void thenTheFragmentDisappear() 
 	  {
 		  try {
-		  assertFalse(CommonActions.IsElementExisis("textViewBarcodeInfo"));
+		  assertFalse(CommonInstructions.IsElementExisis("textViewBarcodeInfo"));
 		  }
 		  catch(Exception ex)
 		  {
@@ -78,7 +78,7 @@ public class FragmentInstructions {
 		  {
 			  try 
 			  {
-				  assertFalse(CommonActions.IsElementExisis("txtOfferToScanOrder"));
+				  assertFalse(CommonInstructions.IsElementExisis("txtOfferToScanOrder"));
 			  }
 			  catch(Exception e)
 			  {}
@@ -90,7 +90,7 @@ public class FragmentInstructions {
 		  {
 			  try 
 			  {
-				  assertFalse(CommonActions.IsElementExisis("txtProgressOrderName"));
+				  assertFalse(CommonInstructions.IsElementExisis("txtProgressOrderName"));
 			  }
 			  catch(Exception e)
 			  {}
