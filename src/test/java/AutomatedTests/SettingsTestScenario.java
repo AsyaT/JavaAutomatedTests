@@ -43,6 +43,15 @@ public class SettingsTestScenario {
       appiumDriver.hideKeyboard();
   }
   
+  @When("^I enter database name '(.*?)'$")
+  public void whenIEnterDataBaseName(String dbName) throws Throwable {
+	  MobileElement dbNameTextEditor = appiumDriver.findElement(By.id("editTextDBName"));
+	  dbNameTextEditor.clear();
+	  dbNameTextEditor.sendKeys(dbName);
+
+      appiumDriver.hideKeyboard();
+  }
+  
   @When("^I enter username '(.*?)'$")
   public void whenIenterusername(String username) throws Throwable {
 	  MobileElement urlTextEitor = appiumDriver.findElement(By.id("editTxt1CUserName"));

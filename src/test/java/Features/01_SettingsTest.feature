@@ -9,6 +9,7 @@ Scenario: Wants select operation without settings set
 Scenario: Wants to input incorrect settings
 	When I press button 'Настройки'
 	And I enter IP adress '0.0.0.0'
+	And I enter database name 'db'
 	And I enter username 'name'
 	And I enter password 'pwd'
 	When I press button 'Сохранить'
@@ -20,6 +21,7 @@ Scenario: Wants to input incorrect settings
 Scenario: Wants to input correct settings
 	When I press button 'Настройки'
 	And I enter IP adress '10.74.255.29'
+	And I enter database name 'erp_tsd'
 	And I enter username 'tsd_ish2'
 	And I enter password '123'
 	When I press button 'Сохранить'
