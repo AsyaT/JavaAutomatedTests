@@ -35,6 +35,7 @@ public class ZFermaAndroidDriver {
     		capabilities.setCapability("platformVersion", "7.1");
     		capabilities.setCapability("app", "C:\\AndroidProjects\\ZebraScanner\\app\\build\\outputs\\apk\\debug\\app-debug.apk");
     		capabilities.setCapability("newCommandTimeout", 300);
+    		capabilities.setCapability("autoGrantPermissions", "true");
 
     		try {
     			URL url = new URL("http://localhost:4723/wd/hub");

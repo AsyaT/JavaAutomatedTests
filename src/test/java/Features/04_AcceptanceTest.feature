@@ -1,4 +1,4 @@
-@Success
+
 Feature: User at acceptance operation
   Scenario: Open acceptance activity
     When I select 'Приемка' in list of operation types
