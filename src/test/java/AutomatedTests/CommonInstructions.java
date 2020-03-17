@@ -45,7 +45,8 @@ public class CommonInstructions {
 		  }
 	  }
 	
-	//TODO: working incorrectly
+	//TODO: possibly need to move method "IsElementExisis" to FragmentInstructions. Might work incorrectly with different class
+	
 	 public static Boolean IsElementExisis(String id)
 	  {
 		  try 
